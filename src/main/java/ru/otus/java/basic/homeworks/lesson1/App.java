@@ -28,7 +28,9 @@ public class App {
         out.println("Сумма положительная");
     }
     void selectColor(int data){
-
+        if(data <= 10){
+            out.println("Красный");
+        }
     }
 
     public static App build(PrintStream anOut) {

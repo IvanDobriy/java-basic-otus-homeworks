@@ -14,7 +14,7 @@ public class AppTests {
     class Arguments {
         final int[] args;
 
-        Arguments(int ...anArgs) {
+        Arguments(int... anArgs) {
             args = anArgs;
         }
 
@@ -78,23 +78,25 @@ public class AppTests {
     }
 
     @Test
-    void selectColorTest() {
-//        final var outputStream = new ByteArrayOutputStream();
-//        final var printStream = new PrintStream(outputStream);
-//        final var app = App.build(printStream);
-//        final var testsData = new Arguments[]{
-//                new Arguments(0, 0, 0),
-//                new Arguments(0, 0, -1),
-//                new Arguments(0, 0, -1),
-//        };
-//        for (final Arguments arguments : testsData) {
-//            Assertions.assertAll(() -> {
-//                app.checkSign(arguments.getArgument(0), arguments.getArgument(1), arguments.getArgument(2));
-//                final var result = outputStream.toByteArray();
-//                final var expected = "Сумма отрицательная\n".getBytes(Charset.defaultCharset());
-//                outputStream.reset();
-//                Assertions.assertArrayEquals(expected, result);
-//            });
-//        }
+    void selectColorTestRed() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+        final var testsData = new Arguments[]{
+                new Arguments(-1),
+                new Arguments(0),
+                new Arguments(1),
+                new Arguments(5),
+                new Arguments(10),
+        };
+        for (final Arguments arguments : testsData) {
+            Assertions.assertAll(() -> {
+                app.selectColor(arguments.getArgument(0));
+                final var result = outputStream.toByteArray();
+                final var expected = "Красный\n".getBytes(Charset.defaultCharset());
+                outputStream.reset();
+                Assertions.assertArrayEquals(expected, result);
+            });
+        }
     }
 }

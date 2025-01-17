@@ -122,6 +122,7 @@ public class AppTests {
             });
         }
     }
+
     @Test
     void selectColorTestGreen() {
         final var outputStream = new ByteArrayOutputStream();
@@ -139,6 +140,28 @@ public class AppTests {
                 app.selectColor(arguments.getArgument(0));
                 final var result = outputStream.toByteArray();
                 final var expected = "Зеленый\n".getBytes(Charset.defaultCharset());
+                outputStream.reset();
+                Assertions.assertArrayEquals(expected, result);
+            });
+        }
+    }
+
+    @Test
+    void compareNumbersTestParameterAMoreOrEqualsParameterB() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+        final var testsData = new Arguments[]{
+                new Arguments(-1, -2),
+                new Arguments(1, 0),
+                new Arguments(5, 5),
+                new Arguments(10, 2)
+        };
+        for (final Arguments arguments : testsData) {
+            Assertions.assertAll(() -> {
+                app.compareNumbers(arguments.getArgument(0), arguments.getArgument(1));
+                final var result = outputStream.toByteArray();
+                final var expected = "a >= b\n".getBytes(Charset.defaultCharset());
                 outputStream.reset();
                 Assertions.assertArrayEquals(expected, result);
             });

@@ -4,6 +4,9 @@ import java.io.PrintStream;
 
 public class App {
     private final PrintStream out;
+    private App() {
+        throw new UnsupportedOperationException(String.format("Used unsupported default %s constructor", this.getClass().getName()));
+    }
 
     private App(PrintStream anOut) {
         out = anOut;
@@ -14,6 +17,11 @@ public class App {
         out.println("World");
         out.println("from");
         out.println("Java");
+    }
+
+    void checkSign(int a, int b, int c) {
+        
+
     }
 
     public static App build(PrintStream anOut) {

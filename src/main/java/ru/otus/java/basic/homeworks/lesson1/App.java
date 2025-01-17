@@ -27,6 +27,9 @@ public class App {
         }
         out.println("Сумма положительная");
     }
+    void selectColor(int data){
+
+    }
 
     public static App build(PrintStream anOut) {
         return new App(anOut);

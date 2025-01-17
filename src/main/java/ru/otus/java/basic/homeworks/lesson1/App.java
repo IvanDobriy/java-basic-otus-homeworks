@@ -20,7 +20,10 @@ public class App {
     }
 
     void checkSign(int a, int b, int c) {
-        
+        final int result = a + b + c;
+        if(result < 0){
+            out.println("Сумма отрицательная");
+        }
 
     }
 

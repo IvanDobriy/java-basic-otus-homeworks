@@ -68,6 +68,7 @@ public class AppTests {
                 app.checkSign(arguments.getA(), arguments.getB(), arguments.getC());
                 final var result = outputStream.toByteArray();
                 final var expected = "Сумма положительная\n".getBytes(Charset.defaultCharset());
+                outputStream.reset();
                 Assertions.assertArrayEquals(expected, result);
             });
         }
@@ -83,7 +84,7 @@ public class AppTests {
                 new Arguments(0, 0, -1),
                 new Arguments(0, -1, -1),
                 new Arguments(-1, 0, 0),
-                new Arguments(-1, 1, 0),
+                new Arguments(-1, -1, 0),
                 new Arguments(-1, 0, -1),
                 new Arguments(-1, -1, -1)
         };
@@ -92,6 +93,7 @@ public class AppTests {
                 app.checkSign(arguments.getA(), arguments.getB(), arguments.getC());
                 final var result = outputStream.toByteArray();
                 final var expected = "Сумма отрицательная\n".getBytes(Charset.defaultCharset());
+                outputStream.reset();
                 Assertions.assertArrayEquals(expected, result);
             });
         }

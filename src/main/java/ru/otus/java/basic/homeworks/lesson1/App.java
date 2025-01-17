@@ -54,6 +54,7 @@ public class App {
             out.println(a + b);
             return;
         }
+        out.println(a - b);
     }
 
     public static App build(PrintStream anOut) {

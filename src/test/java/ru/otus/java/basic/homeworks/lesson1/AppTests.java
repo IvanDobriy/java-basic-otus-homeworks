@@ -190,7 +190,7 @@ public class AppTests {
     }
 
     @Test
-    void addOrSubtractAndPrintTestIncrement() {
+    void addOrSubtractAndPrintTestIncrementIsTrue() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
         final var app = App.build(printStream);
@@ -211,4 +211,28 @@ public class AppTests {
             });
         }
     }
+
+    @Test
+    void addOrSubtractAndPrintTestIncrementIsFalse() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+        final var testsData = new Arguments[]{
+                new Arguments(-2, -1),
+                new Arguments(0, 1),
+                new Arguments(2, 10)
+        };
+        for (final Arguments arguments : testsData) {
+            Assertions.assertAll(() -> {
+                int arg0 = arguments.getArgument(0);
+                int arg1 = arguments.getArgument(1);
+                app.addOrSubtractAndPrint(arg0, arg1, false);
+                final var result = outputStream.toByteArray();
+                final var expected = String.format("%d\n", arg0 - arg1).getBytes(Charset.defaultCharset());
+                outputStream.reset();
+                Assertions.assertArrayEquals(expected, result);
+            });
+        }
+    }
+
 }

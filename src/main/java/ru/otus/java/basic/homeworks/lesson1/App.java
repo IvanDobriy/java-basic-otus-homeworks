@@ -49,6 +49,12 @@ public class App {
         out.println("a < b");
     }
 
+    void addOrSubtractAndPrint(int a, int b, boolean increment) {
+        if (increment) {
+            out.println(a + b);
+            return;
+        }
+    }
 
     public static App build(PrintStream anOut) {
         return new App(anOut);

@@ -99,4 +99,27 @@ public class AppTests {
             });
         }
     }
+
+    @Test
+    void selectColorTestYellow() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+        final var testsData = new Arguments[]{
+                new Arguments(11),
+                new Arguments(12),
+                new Arguments(15),
+                new Arguments(19),
+                new Arguments(20),
+        };
+        for (final Arguments arguments : testsData) {
+            Assertions.assertAll(() -> {
+                app.selectColor(arguments.getArgument(0));
+                final var result = outputStream.toByteArray();
+                final var expected = "Желтый\n".getBytes(Charset.defaultCharset());
+                outputStream.reset();
+                Assertions.assertArrayEquals(expected, result);
+            });
+        }
+    }
 }

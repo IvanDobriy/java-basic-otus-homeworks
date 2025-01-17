@@ -30,7 +30,13 @@ public class App {
     void selectColor(int data){
         if(data <= 10){
             out.println("Красный");
+            return;
         }
+        if(data <= 20){
+            out.println("Желтый");
+            return;
+        }
+
     }
 
     public static App build(PrintStream anOut) {

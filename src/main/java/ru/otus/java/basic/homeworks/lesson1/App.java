@@ -64,5 +64,9 @@ public class App {
     public static void main(String[] args) {
         var app = build(System.out);
         app.greetings();
+        app.checkSign(1,2, 3);
+        app.selectColor(20);
+        app.compareNumbers(1, 2);
+        app.addOrSubtractAndPrint(1, 2, true);
     }
 }

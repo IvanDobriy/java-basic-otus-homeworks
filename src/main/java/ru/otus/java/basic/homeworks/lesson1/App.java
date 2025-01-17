@@ -40,11 +40,13 @@ public class App {
         }
         out.println("Зеленый");
     }
-    void compareNumbers(int a, int b){
-        if(a >= b){
+
+    void compareNumbers(int a, int b) {
+        if (a >= b) {
             out.println("a >= b");
             return;
         }
+        out.println("a < b");
     }
 
 

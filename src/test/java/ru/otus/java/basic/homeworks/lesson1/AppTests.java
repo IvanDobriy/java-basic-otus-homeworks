@@ -167,4 +167,25 @@ public class AppTests {
             });
         }
     }
+
+    @Test
+    void compareNumbersTestParameterALessWhenB() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+        final var testsData = new Arguments[]{
+                new Arguments(-2, -1),
+                new Arguments(0, 1),
+                new Arguments(2, 10)
+        };
+        for (final Arguments arguments : testsData) {
+            Assertions.assertAll(() -> {
+                app.compareNumbers(arguments.getArgument(0), arguments.getArgument(1));
+                final var result = outputStream.toByteArray();
+                final var expected = "a < b\n".getBytes(Charset.defaultCharset());
+                outputStream.reset();
+                Assertions.assertArrayEquals(expected, result);
+            });
+        }
+    }
 }

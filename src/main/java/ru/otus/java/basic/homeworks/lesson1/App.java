@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 public class App {
     private final PrintStream out;
+
     private App() {
         throw new UnsupportedOperationException(String.format("Used unsupported default %s constructor", this.getClass().getName()));
     }
@@ -21,22 +22,23 @@ public class App {
 
     void checkSign(int a, int b, int c) {
         final int result = a + b + c;
-        if(result < 0){
+        if (result < 0) {
             out.println("Сумма отрицательная");
             return;
         }
         out.println("Сумма положительная");
     }
-    void selectColor(int data){
-        if(data <= 10){
+
+    void selectColor(int data) {
+        if (data <= 10) {
             out.println("Красный");
             return;
         }
-        if(data <= 20){
+        if (data <= 20) {
             out.println("Желтый");
             return;
         }
-
+        out.println("Зеленый");
     }
 
     public static App build(PrintStream anOut) {

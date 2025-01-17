@@ -1,7 +1,6 @@
 package ru.otus.java.basic.homeworks.lesson1;
 
 
-import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -53,16 +52,7 @@ public class AppTests {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
         final var app = App.build(printStream);
-        final var testsData = new Arguments[]{
-                new Arguments(0, 0, 0),
-                new Arguments(0, 1, 0),
-                new Arguments(0, 0, 1),
-                new Arguments(0, 1, 1),
-                new Arguments(1, 0, 0),
-                new Arguments(1, 1, 0),
-                new Arguments(1, 0, 1),
-                new Arguments(1, 1, 1)
-        };
+        final var testsData = new Arguments[]{new Arguments(0, 0, 0), new Arguments(0, 1, 0), new Arguments(0, 0, 1), new Arguments(0, 1, 1), new Arguments(1, 0, 0), new Arguments(1, 1, 0), new Arguments(1, 0, 1), new Arguments(1, 1, 1)};
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.checkSign(arguments.getA(), arguments.getB(), arguments.getC());

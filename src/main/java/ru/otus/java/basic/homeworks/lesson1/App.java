@@ -23,8 +23,9 @@ public class App {
         final int result = a + b + c;
         if(result < 0){
             out.println("Сумма отрицательная");
+            return;
         }
-
+        out.println("Сумма положительная");
     }
 
     public static App build(PrintStream anOut) {

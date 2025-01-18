@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.util.logging.Logger;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTests {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
     class Arguments {
         final int[] args;
 
@@ -21,14 +23,17 @@ public class AppTests {
         int getArgument(int position) {
             return args[position];
         }
+    }
 
+    int defaultRandomGenerator() {
+        return 1;
     }
 
     @Test
     void greetingsTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         app.greetings();
         final var result = outputStream.toByteArray();
         final var expected = "Hello\nWorld\nfrom\nJava\n".getBytes(Charset.defaultCharset());
@@ -39,7 +44,7 @@ public class AppTests {
     void checkSignTestResultMoreOrEquals0() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{new Arguments(0, 0, 0), new Arguments(0, 1, 0), new Arguments(0, 0, 1), new Arguments(0, 1, 1), new Arguments(1, 0, 0), new Arguments(1, 1, 0), new Arguments(1, 0, 1), new Arguments(1, 1, 1)};
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
@@ -56,7 +61,7 @@ public class AppTests {
     void checkSignTestResultLessWhen0() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(0, -1, 0),
                 new Arguments(0, 0, -1),
@@ -81,7 +86,7 @@ public class AppTests {
     void selectColorTestRed() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-1),
                 new Arguments(0),
@@ -104,7 +109,7 @@ public class AppTests {
     void selectColorTestYellow() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(11),
                 new Arguments(12),
@@ -127,7 +132,7 @@ public class AppTests {
     void selectColorTestGreen() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(21),
                 new Arguments(22),
@@ -150,7 +155,7 @@ public class AppTests {
     void compareNumbersTestParameterAMoreOrEqualsParameterB() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-1, -2),
                 new Arguments(1, 0),
@@ -172,7 +177,7 @@ public class AppTests {
     void compareNumbersTestParameterALessWhenB() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-2, -1),
                 new Arguments(0, 1),
@@ -193,7 +198,7 @@ public class AppTests {
     void addOrSubtractAndPrintTestIncrementIsTrue() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-2, -1),
                 new Arguments(0, 1),
@@ -201,8 +206,8 @@ public class AppTests {
         };
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
-                int arg0 = arguments.getArgument(0);
-                int arg1 = arguments.getArgument(1);
+                final int arg0 = arguments.getArgument(0);
+                final int arg1 = arguments.getArgument(1);
                 app.addOrSubtractAndPrint(arg0, arg1, true);
                 final var result = outputStream.toByteArray();
                 final var expected = String.format("%d\n", arg0 + arg1).getBytes(Charset.defaultCharset());
@@ -216,7 +221,7 @@ public class AppTests {
     void addOrSubtractAndPrintTestIncrementIsFalse() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-2, -1),
                 new Arguments(0, 1),
@@ -224,8 +229,8 @@ public class AppTests {
         };
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
-                int arg0 = arguments.getArgument(0);
-                int arg1 = arguments.getArgument(1);
+                final int arg0 = arguments.getArgument(0);
+                final int arg1 = arguments.getArgument(1);
                 app.addOrSubtractAndPrint(arg0, arg1, false);
                 final var result = outputStream.toByteArray();
                 final var expected = String.format("%d\n", arg0 - arg1).getBytes(Charset.defaultCharset());
@@ -233,6 +238,42 @@ public class AppTests {
                 Assertions.assertArrayEquals(expected, result);
             });
         }
+    }
+
+    @Test
+    void runMenuTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var inputData = "1\n2\n3\n4\n5\n".getBytes(Charset.defaultCharset());
+        final var inputStream = new ByteArrayInputStream(inputData);
+        final var app = App.build(inputStream, printStream, this::defaultRandomGenerator);
+        final var expectedPrefix = "Введите число от 1 до 5\n";
+
+        var expected = (expectedPrefix + "Hello\nWorld\nfrom\nJava\n").getBytes(Charset.defaultCharset());
+        app.runMenu();
+        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+
+        outputStream.reset();
+        expected = (expectedPrefix + "Сумма положительная\n").getBytes(Charset.defaultCharset());
+        app.runMenu();
+        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+
+        outputStream.reset();
+        expected = (expectedPrefix + "Красный\n").getBytes(Charset.defaultCharset());
+        app.runMenu();
+        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+
+
+        outputStream.reset();
+        expected = (expectedPrefix + "a >= b\n").getBytes(Charset.defaultCharset());
+        app.runMenu();
+        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+
+        outputStream.reset();
+        expected = (expectedPrefix + "0\n").getBytes(Charset.defaultCharset());
+        app.runMenu();
+        logger.info(outputStream.toString());
+        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
     }
 
 }

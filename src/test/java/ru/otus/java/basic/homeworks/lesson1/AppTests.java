@@ -5,14 +5,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.nio.charset.Charset;
-import java.util.logging.Logger;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTests {
-    private Logger logger = Logger.getLogger(this.getClass().getName());
-
     class Arguments {
         final int[] args;
 
@@ -35,9 +34,9 @@ public class AppTests {
         final var printStream = new PrintStream(outputStream);
         final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
         app.greetings();
-        final var result = outputStream.toByteArray();
-        final var expected = "Hello\nWorld\nfrom\nJava\n".getBytes(Charset.defaultCharset());
-        Assertions.assertArrayEquals(expected, result);
+        final var result = outputStream.toString();
+        final var expected = "Hello\nWorld\nfrom\nJava\n";
+        Assertions.assertEquals(expected, result);
     }
 
     @Test
@@ -49,10 +48,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.checkSign(arguments.getArgument(0), arguments.getArgument(1), arguments.getArgument(2));
-                final var result = outputStream.toByteArray();
-                final var expected = "Сумма положительная\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "Сумма положительная\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -74,10 +73,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.checkSign(arguments.getArgument(0), arguments.getArgument(1), arguments.getArgument(2));
-                final var result = outputStream.toByteArray();
-                final var expected = "Сумма отрицательная\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "Сумма отрицательная\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -97,10 +96,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.selectColor(arguments.getArgument(0));
-                final var result = outputStream.toByteArray();
-                final var expected = "Красный\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "Красный\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -120,10 +119,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.selectColor(arguments.getArgument(0));
-                final var result = outputStream.toByteArray();
-                final var expected = "Желтый\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "Желтый\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -143,10 +142,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.selectColor(arguments.getArgument(0));
-                final var result = outputStream.toByteArray();
-                final var expected = "Зеленый\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "Зеленый\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -165,10 +164,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.compareNumbers(arguments.getArgument(0), arguments.getArgument(1));
-                final var result = outputStream.toByteArray();
-                final var expected = "a >= b\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "a >= b\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -186,10 +185,10 @@ public class AppTests {
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
                 app.compareNumbers(arguments.getArgument(0), arguments.getArgument(1));
-                final var result = outputStream.toByteArray();
-                final var expected = "a < b\n".getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = "a < b\n";
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -209,10 +208,10 @@ public class AppTests {
                 final int arg0 = arguments.getArgument(0);
                 final int arg1 = arguments.getArgument(1);
                 app.addOrSubtractAndPrint(arg0, arg1, true);
-                final var result = outputStream.toByteArray();
-                final var expected = String.format("%d\n", arg0 + arg1).getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = String.format("%d\n", arg0 + arg1);
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -232,10 +231,10 @@ public class AppTests {
                 final int arg0 = arguments.getArgument(0);
                 final int arg1 = arguments.getArgument(1);
                 app.addOrSubtractAndPrint(arg0, arg1, false);
-                final var result = outputStream.toByteArray();
-                final var expected = String.format("%d\n", arg0 - arg1).getBytes(Charset.defaultCharset());
+                final var result = outputStream.toString();
+                final var expected = String.format("%d\n", arg0 - arg1);
                 outputStream.reset();
-                Assertions.assertArrayEquals(expected, result);
+                Assertions.assertEquals(expected, result);
             });
         }
     }
@@ -249,31 +248,30 @@ public class AppTests {
         final var app = App.build(inputStream, printStream, this::defaultRandomGenerator);
         final var expectedPrefix = "Введите число от 1 до 5\n";
 
-        var expected = (expectedPrefix + "Hello\nWorld\nfrom\nJava\n").getBytes(Charset.defaultCharset());
+        var expected = expectedPrefix + "Hello\nWorld\nfrom\nJava\n";
         app.runMenu();
-        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+        Assertions.assertEquals(expected, outputStream.toString());
 
         outputStream.reset();
-        expected = (expectedPrefix + "Сумма положительная\n").getBytes(Charset.defaultCharset());
+        expected = expectedPrefix + "Сумма положительная\n";
         app.runMenu();
-        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+        Assertions.assertEquals(expected, outputStream.toString());
 
         outputStream.reset();
-        expected = (expectedPrefix + "Красный\n").getBytes(Charset.defaultCharset());
+        expected = expectedPrefix + "Красный\n";
         app.runMenu();
-        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+        Assertions.assertEquals(expected, outputStream.toString());
 
 
         outputStream.reset();
-        expected = (expectedPrefix + "a >= b\n").getBytes(Charset.defaultCharset());
+        expected = expectedPrefix + "a >= b\n";
         app.runMenu();
-        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+        Assertions.assertEquals(expected, outputStream.toString());
 
         outputStream.reset();
-        expected = (expectedPrefix + "0\n").getBytes(Charset.defaultCharset());
+        expected = expectedPrefix + "0\n";
         app.runMenu();
-        logger.info(outputStream.toString());
-        Assertions.assertArrayEquals(expected, outputStream.toByteArray());
+        Assertions.assertEquals(expected, outputStream.toString());
     }
 
 }

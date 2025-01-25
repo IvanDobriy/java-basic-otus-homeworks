@@ -91,6 +91,54 @@ public class AppTests {
         expected = new int[]{2, 3, 4};
         app.add(1, data);
         Assertions.assertArrayEquals(expected, data);
+    }
 
+    @Test
+    void largestPartSumTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var data = new int[]{1, 2, 3, 4};
+        app.largestPartSum(data);
+        var result = outputStream.toString();
+        outputStream.reset();
+        var expected = "7\n";
+        Assertions.assertEquals(expected, result);
+
+        data = new int[]{4, 3, 2, 1};
+        app.largestPartSum(data);
+        result = outputStream.toString();
+        outputStream.reset();
+        expected = "7\n";
+        Assertions.assertEquals(expected, result);
+
+        data = new int[]{1, 2, 10, 3, 5};
+        app.largestPartSum(data);
+        result = outputStream.toString();
+        outputStream.reset();
+        expected = "8\n";
+        Assertions.assertEquals(expected, result);
+
+        data = new int[]{3, 5, 10, 1, 2};
+        app.largestPartSum(data);
+        result = outputStream.toString();
+        outputStream.reset();
+        expected = "8\n";
+        Assertions.assertEquals(expected, result);
+
+        data = new int[]{-1, -2, 10, 3, -6};
+        app.largestPartSum(data);
+        result = outputStream.toString();
+        outputStream.reset();
+        expected = "-3\n";
+        Assertions.assertEquals(expected, result);
+
+        data = new int[0];
+        app.largestPartSum(data);
+        result = outputStream.toString();
+        outputStream.reset();
+        expected = "\n";
+        Assertions.assertEquals(expected, result);
     }
 }

@@ -47,6 +47,39 @@ public class App {
         }
     }
 
+    void largestPartSum(int[] elements) {
+        if (elements.length < 2) {
+            out.println();
+            return;
+        }
+
+        int firstHalfEnd = 0;
+        int secondHalfBegin = 0;
+
+        if (elements.length % 2 == 0) {
+            firstHalfEnd = secondHalfBegin = elements.length / 2;
+        } else {
+            firstHalfEnd = elements.length / 2;
+            secondHalfBegin = firstHalfEnd + 1;
+        }
+
+        int firstHalfSum = 0;
+        for (int i = 0; i < firstHalfEnd; i++) {
+            firstHalfSum += elements[i];
+        }
+
+        int secondHalfSum = 0;
+        for (int i = secondHalfBegin; i < elements.length; i++) {
+            secondHalfSum += elements[i];
+        }
+
+        if (firstHalfSum > secondHalfSum) {
+            out.println(firstHalfSum);
+            return;
+        }
+        out.println(secondHalfSum);
+    }
+
     public static void main(String[] args) {
 
     }

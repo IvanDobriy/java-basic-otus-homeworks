@@ -34,9 +34,16 @@ public class App {
         }
         out.println(result);
     }
-    void fill(int value, int[] elements){
-        for (int i = 0; i < elements.length; i++){
+
+    void fill(int value, int[] elements) {
+        for (int i = 0; i < elements.length; i++) {
             elements[i] = value;
+        }
+    }
+
+    void add(int value, int[] elements) {
+        for (int i = 0; i < elements.length; i++) {
+            elements[i] += value;
         }
     }
 

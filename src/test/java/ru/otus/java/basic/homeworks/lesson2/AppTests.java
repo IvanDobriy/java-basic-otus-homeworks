@@ -75,4 +75,22 @@ public class AppTests {
         app.fill(2, result);
         Assertions.assertArrayEquals(expected, result);
     }
+
+    @Test
+    void addTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var data = new int[]{1, 2, 3};
+        var expected = new int[]{1, 2, 3};
+        app.add(0, data);
+        Assertions.assertArrayEquals(expected, data);
+
+        data = new int[]{1, 2, 3};
+        expected = new int[]{2, 3, 4};
+        app.add(1, data);
+        Assertions.assertArrayEquals(expected, data);
+
+    }
 }

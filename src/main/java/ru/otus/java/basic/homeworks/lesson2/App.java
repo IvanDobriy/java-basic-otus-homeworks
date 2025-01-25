@@ -1,6 +1,5 @@
 package ru.otus.java.basic.homeworks.lesson2;
 
-import java.io.InputStream;
 import java.io.PrintStream;
 
 public class App {
@@ -23,6 +22,17 @@ public class App {
             out.print(string);
         }
         out.println();
+    }
+
+    void sum(int[] elements) {
+        var result = 0;
+        for (int i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (element > 5) {
+                result += element;
+            }
+        }
+        out.println(result);
     }
 
     public static void main(String[] args) {

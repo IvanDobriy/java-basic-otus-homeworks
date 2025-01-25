@@ -3,11 +3,9 @@ package ru.otus.java.basic.homeworks.lesson2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTests {
@@ -39,6 +37,25 @@ public class AppTests {
         result = outputStream.toString();
         expected = "\n";
         outputStream.reset();
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void sumTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+        var data = new int[]{-1, -2, 0, 1, 2, 3, 4, 5};
+        app.sum(data);
+        var result = outputStream.toString();
+        var expected = "0\n";
+        outputStream.reset();
+        Assertions.assertEquals(expected, result);
+
+        data = new int[]{6, 7, 8, 9};
+        app.sum(data);
+        expected = "30\n";
+        result = outputStream.toString();
         Assertions.assertEquals(expected, result);
     }
 }

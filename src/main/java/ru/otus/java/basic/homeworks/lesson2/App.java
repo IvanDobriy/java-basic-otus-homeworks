@@ -34,6 +34,11 @@ public class App {
         }
         out.println(result);
     }
+    void fill(int value, int[] elements){
+        for (int i = 0; i < elements.length; i++){
+            elements[i] = value;
+        }
+    }
 
     public static void main(String[] args) {
 

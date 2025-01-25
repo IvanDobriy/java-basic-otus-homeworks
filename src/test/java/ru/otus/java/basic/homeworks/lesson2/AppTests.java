@@ -45,6 +45,7 @@ public class AppTests {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
         final var app = App.build(printStream);
+
         var data = new int[]{-1, -2, 0, 1, 2, 3, 4, 5};
         app.sum(data);
         var result = outputStream.toString();
@@ -57,5 +58,21 @@ public class AppTests {
         expected = "30\n";
         result = outputStream.toString();
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void fillTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var result = new int[3];
+        var expected = new int[]{1, 1, 1};
+        app.fill(1, result);
+        Assertions.assertArrayEquals(expected, result);
+        result = new int[3];
+        expected = new int[]{2, 2, 2};
+        app.fill(2, result);
+        Assertions.assertArrayEquals(expected, result);
     }
 }

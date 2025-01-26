@@ -182,5 +182,9 @@ public class AppTests {
         result = app.findPoint(new int[]{-1, 1, 1, -1});
         expected = 2;
         Assertions.assertEquals(expected, result);
+
+        result = app.findPoint(new int[]{1, 3});
+        expected = -1;
+        Assertions.assertEquals(expected, result);
     }
 }

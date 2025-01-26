@@ -222,4 +222,32 @@ public class AppTests {
         expected = -1;
         Assertions.assertEquals(expected, result);
     }
+
+    @Test
+    void swapTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var arr = new int[]{1, 2, 3, 4};
+        app.swap(arr);
+        var expected = new int[]{4, 3, 2, 1};
+        Assertions.assertArrayEquals(expected, arr);
+
+        arr = new int[]{1, 2, 3, 4, 5};
+        app.swap(arr);
+        expected = new int[]{5, 4, 3, 2, 1};
+        Assertions.assertArrayEquals(expected, arr);
+
+        arr = new int[]{1};
+        app.swap(arr);
+        expected = new int[]{1};
+        Assertions.assertArrayEquals(expected, arr);
+
+
+        arr = new int[]{1, 2};
+        app.swap(arr);
+        expected = new int[]{2, 1};
+        Assertions.assertArrayEquals(expected, arr);
+    }
 }

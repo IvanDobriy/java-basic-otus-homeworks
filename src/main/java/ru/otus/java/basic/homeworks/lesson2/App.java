@@ -143,6 +143,15 @@ public class App {
         return 1;
     }
 
+    void swap(int[] arr) {
+        for (int i = 0; i < arr.length / 2; i++) {
+            int first = arr[i];
+            int second = arr[arr.length - 1 - i];
+            arr[i] = second;
+            arr[arr.length - 1 - i] = first;
+        }
+    }
+
     public static void main(String[] args) {
 
     }

@@ -115,6 +115,34 @@ public class App {
         return -1;
     }
 
+    /**
+     * @param arr
+     * @param isDescending
+     * @return 1 - true, 0 - false, -1 - some error
+     */
+    int isOrdered(int[] arr, boolean isDescending) {
+        if (arr.length == 0) {
+            return -1;
+        }
+        int previous = arr[0];
+        if (isDescending) {
+            for (int i = 0; i < arr.length; i++) {
+                if (previous < arr[i]) {
+                    return 0;
+                }
+                previous = arr[i];
+            }
+            return 1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (previous > arr[i]) {
+                return 0;
+            }
+            previous = arr[i];
+        }
+        return 1;
+    }
+
     public static void main(String[] args) {
 
     }

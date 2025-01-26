@@ -190,6 +190,36 @@ public class AppTests {
         result = app.findPoint(new int[]{1, 3, 5});
         expected = -1;
         Assertions.assertEquals(expected, result);
+        //TODO is normal case?
+        result = app.findPoint(new int[]{0, 0, 0});
+        expected = 1;
+        Assertions.assertEquals(expected, result);
+    }
 
+    @Test
+    void isOrderedTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var result = app.isOrdered(new int[]{1, 2, 3, 4}, false);
+        var expected = 1;
+        Assertions.assertEquals(expected, result);
+
+        result = app.isOrdered(new int[]{1, 2, 4, 3}, false);
+        expected = 0;
+        Assertions.assertEquals(expected, result);
+
+        result = app.isOrdered(new int[]{4, 3, 2, 1}, true);
+        expected = 1;
+        Assertions.assertEquals(expected, result);
+
+        result = app.isOrdered(new int[]{4, 3, 1, 2}, true);
+        expected = 0;
+        Assertions.assertEquals(expected, result);
+
+        result = app.isOrdered(new int[0], true);
+        expected = -1;
+        Assertions.assertEquals(expected, result);
     }
 }

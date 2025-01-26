@@ -97,6 +97,24 @@ public class App {
         out.println(secondHalfSum);
     }
 
+    int findPoint(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        if (sum % 2 != 0) {
+            return -1;
+        }
+        int halfSum = sum / 2;
+        for (int i = 0; i < arr.length; i++) {
+            sum -= arr[i];
+            if (halfSum == sum) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
 
     }

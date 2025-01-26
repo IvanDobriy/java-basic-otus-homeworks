@@ -160,4 +160,27 @@ public class AppTests {
         expected = new int[]{1, 2};
         Assertions.assertArrayEquals(expected, result);
     }
+
+    @Test
+    void findPointTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var result = app.findPoint(new int[]{1, 1, 1, 1});
+        var expected = 2;
+        Assertions.assertEquals(expected, result);
+
+        result = app.findPoint(new int[]{3, 1, 1, 1});
+        expected = 1;
+        Assertions.assertEquals(expected, result);
+
+        result = app.findPoint(new int[]{1, 2, 1, 4});
+        expected = 3;
+        Assertions.assertEquals(expected, result);
+
+        result = app.findPoint(new int[]{-1, 1, 1, -1});
+        expected = 2;
+        Assertions.assertEquals(expected, result);
+    }
 }

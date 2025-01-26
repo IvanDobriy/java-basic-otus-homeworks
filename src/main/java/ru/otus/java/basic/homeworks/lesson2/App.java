@@ -47,6 +47,23 @@ public class App {
         }
     }
 
+    int[] arraysAdd(int[]... args) {
+        var max = new int[0];
+        for (int i = 0; i < args.length; i++) {
+            if (max.length < args[i].length) {
+                max = args[i];
+            }
+        }
+        final var result = new int[max.length];
+        for (int i = 0; i < args.length; i++) {
+            final var array = args[i];
+            for (int j = 0; j < array.length; j++) {
+                result[j] += array[j];
+            }
+        }
+        return result;
+    }
+
     void largestPartSum(int[] elements) {
         if (elements.length < 2) {
             out.println();

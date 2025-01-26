@@ -141,4 +141,23 @@ public class AppTests {
         expected = "\n";
         Assertions.assertEquals(expected, result);
     }
+
+    @Test
+    void arraysAddTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = App.build(printStream);
+
+        var result = app.arraysAdd(new int[]{1, 2}, new int[]{1, 2, 3, 4}, new int[]{1, 2, 3, 4, 5});
+        var expected = new int[]{3, 6, 6, 8, 5};
+        Assertions.assertArrayEquals(expected, result);
+
+        result = app.arraysAdd();
+        expected = new int[0];
+        Assertions.assertArrayEquals(expected, result);
+
+        result = app.arraysAdd(new int[]{1, 2});
+        expected = new int[]{1, 2};
+        Assertions.assertArrayEquals(expected, result);
+    }
 }

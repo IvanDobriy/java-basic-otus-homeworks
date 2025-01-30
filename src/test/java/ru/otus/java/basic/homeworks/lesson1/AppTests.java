@@ -32,7 +32,7 @@ public class AppTests {
     void greetingsTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         app.greetings();
         final var result = outputStream.toString();
         final var expected = "Hello\nWorld\nfrom\nJava\n";
@@ -43,7 +43,7 @@ public class AppTests {
     void checkSignTestResultMoreOrEquals0() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{new Arguments(0, 0, 0), new Arguments(0, 1, 0), new Arguments(0, 0, 1), new Arguments(0, 1, 1), new Arguments(1, 0, 0), new Arguments(1, 1, 0), new Arguments(1, 0, 1), new Arguments(1, 1, 1)};
         for (final Arguments arguments : testsData) {
             Assertions.assertAll(() -> {
@@ -60,7 +60,7 @@ public class AppTests {
     void checkSignTestResultLessWhen0() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(0, -1, 0),
                 new Arguments(0, 0, -1),
@@ -85,7 +85,7 @@ public class AppTests {
     void selectColorTestRed() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-1),
                 new Arguments(0),
@@ -108,7 +108,7 @@ public class AppTests {
     void selectColorTestYellow() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(11),
                 new Arguments(12),
@@ -131,7 +131,7 @@ public class AppTests {
     void selectColorTestGreen() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(21),
                 new Arguments(22),
@@ -154,7 +154,7 @@ public class AppTests {
     void compareNumbersTestParameterAMoreOrEqualsParameterB() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-1, -2),
                 new Arguments(1, 0),
@@ -176,7 +176,7 @@ public class AppTests {
     void compareNumbersTestParameterALessWhenB() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-2, -1),
                 new Arguments(0, 1),
@@ -197,7 +197,7 @@ public class AppTests {
     void addOrSubtractAndPrintTestIncrementIsTrue() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-2, -1),
                 new Arguments(0, 1),
@@ -220,7 +220,7 @@ public class AppTests {
     void addOrSubtractAndPrintTestIncrementIsFalse() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(System.in, printStream, this::defaultRandomGenerator);
+        final var app = new App(System.in, printStream, this::defaultRandomGenerator);
         final var testsData = new Arguments[]{
                 new Arguments(-2, -1),
                 new Arguments(0, 1),
@@ -245,7 +245,7 @@ public class AppTests {
         final var printStream = new PrintStream(outputStream);
         final var inputData = "1\n2\n3\n4\n5\n".getBytes(Charset.defaultCharset());
         final var inputStream = new ByteArrayInputStream(inputData);
-        final var app = App.build(inputStream, printStream, this::defaultRandomGenerator);
+        final var app = new App(inputStream, printStream, this::defaultRandomGenerator);
         final var expectedPrefix = "Введите число от 1 до 5\n";
 
         var expected = expectedPrefix + "Hello\nWorld\nfrom\nJava\n";

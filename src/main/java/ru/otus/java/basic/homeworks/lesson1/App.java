@@ -18,20 +18,20 @@ public class App {
         throw new UnsupportedOperationException(String.format("Used unsupported default %s constructor", this.getClass().getName()));
     }
 
-    private App(InputStream anInput, PrintStream anOut, RandomGenerator aGenerator) {
+    public App(InputStream anInput, PrintStream anOut, RandomGenerator aGenerator) {
         scanner = new Scanner(anInput);
         out = anOut;
         generator = aGenerator;
     }
 
-    void greetings() {
+    public void greetings() {
         out.println("Hello");
         out.println("World");
         out.println("from");
         out.println("Java");
     }
 
-    void checkSign(int a, int b, int c) {
+    public void checkSign(int a, int b, int c) {
         final int result = a + b + c;
         if (result < 0) {
             out.println("Сумма отрицательная");
@@ -40,7 +40,7 @@ public class App {
         out.println("Сумма положительная");
     }
 
-    void selectColor(int data) {
+    public void selectColor(int data) {
         if (data <= 10) {
             out.println("Красный");
             return;
@@ -52,7 +52,7 @@ public class App {
         out.println("Зеленый");
     }
 
-    void compareNumbers(int a, int b) {
+    public void compareNumbers(int a, int b) {
         if (a >= b) {
             out.println("a >= b");
             return;
@@ -60,7 +60,7 @@ public class App {
         out.println("a < b");
     }
 
-    void addOrSubtractAndPrint(int a, int b, boolean increment) {
+    public void addOrSubtractAndPrint(int a, int b, boolean increment) {
         if (increment) {
             out.println(a + b);
             return;
@@ -68,7 +68,7 @@ public class App {
         out.println(a - b);
     }
 
-    void runMenu() {
+    public void runMenu() {
         out.println("Введите число от 1 до 5");
         switch (scanner.nextInt()) {
             case 1: {
@@ -94,12 +94,8 @@ public class App {
         }
     }
 
-    public static App build(InputStream anInput, PrintStream anOut, RandomGenerator generator) {
-        return new App(anInput, anOut, generator);
-    }
-
     public static void main(String[] args) {
-        var app = build(System.in, System.out, () -> (int) (Math.random() * 1000));
+        var app = new App(System.in, System.out, () -> (int) (Math.random() * 1000));
         app.runMenu();
     }
 }

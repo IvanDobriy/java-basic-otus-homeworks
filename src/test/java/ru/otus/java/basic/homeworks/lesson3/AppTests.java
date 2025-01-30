@@ -120,7 +120,6 @@ public class AppTests {
         result = app.lineSum(arr, 2, false);
         Assertions.assertEquals(18, result);
 
-
         arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         result = app.lineSum(arr, 3, true);
         Assertions.assertEquals(-1, result);
@@ -129,11 +128,13 @@ public class AppTests {
         result = app.lineSum(arr, 3, false);
         Assertions.assertEquals(-1, result);
 
-
         arr = new int[][]{{1, 2, 3}, {4, 5}, {7, 8, 9}};
         result = app.lineSum(arr, 2, false);
         Assertions.assertEquals(-1, result);
 
+        arr = new int[][]{};
+        result = app.lineSum(arr, 2, false);
+        Assertions.assertEquals(-1, result);
 
         arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         result = app.lineSum(arr, -1, true);
@@ -142,5 +143,7 @@ public class AppTests {
         arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         result = app.lineSum(arr, -1, false);
         Assertions.assertEquals(15, result);
+
+
     }
 }

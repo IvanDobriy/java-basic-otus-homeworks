@@ -70,9 +70,7 @@ public class AppTests {
 
     @Test
     void eyeTest() {
-        final var outputStream = new ByteArrayOutputStream();
-        final var printStream = new PrintStream(outputStream);
-        final var app = new App(printStream);
+        final var app = new App(System.out);
 
         var arr = new int[3][3];
         app.eye(arr, 1);
@@ -103,12 +101,37 @@ public class AppTests {
 
     @Test
     void findMaxTest() {
-        final var outputStream = new ByteArrayOutputStream();
-        final var printStream = new PrintStream(outputStream);
-        final var app = new App(printStream);
+        final var app = new App(System.out);
 
         final var arr = new int[][]{{-1, -2, Integer.MIN_VALUE}, {1, 2, 3}, {4, 5, 6}};
         final var result = app.findMax(arr);
         Assertions.assertEquals(6, result);
+    }
+
+    @Test
+    void lineSumTest() {
+        final var app = new App(System.out);
+
+        var arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        var result = app.lineSum(arr, 2, true);
+        Assertions.assertEquals(24, result);
+
+        arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        result = app.lineSum(arr, 2, false);
+        Assertions.assertEquals(18, result);
+
+
+        arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        result = app.lineSum(arr, 3, true);
+        Assertions.assertEquals(-1, result);
+
+        arr = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        result = app.lineSum(arr, 3, false);
+        Assertions.assertEquals(-1, result);
+
+
+        arr = new int[][]{{1, 2, 3}, {4, 5}, {7, 8, 9}};
+        result = app.lineSum(arr, 2, false);
+        Assertions.assertEquals(-1, result);
     }
 }

@@ -56,6 +56,32 @@ public class App {
         return result;
     }
 
+    public int lineSum(int[][] arr, int pos, boolean isRow) {
+        if (pos < 0) {
+            pos *= -1;
+        }
+        if (arr.length == 0) {
+            return -1;
+        }
+        if (isRow && arr.length <= pos) {
+            return -1;
+        }
+        int result = 0;
+        if (isRow) {
+            for (int i = 0; i < arr[pos].length; i++) {
+                result += arr[pos][i];
+            }
+            return result;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].length <= pos) {
+                return -1;
+            }
+            result += arr[i][pos];
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
 
     }

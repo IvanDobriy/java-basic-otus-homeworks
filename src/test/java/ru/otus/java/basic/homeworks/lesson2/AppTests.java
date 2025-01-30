@@ -13,7 +13,7 @@ public class AppTests {
     void printStringTests() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         app.printString(0, "0");
         var result = outputStream.toString();
@@ -44,7 +44,7 @@ public class AppTests {
     void sumTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var data = new int[]{-1, -2, 0, 1, 2, 3, 4, 5};
         app.sum(data);
@@ -64,7 +64,7 @@ public class AppTests {
     void fillTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var result = new int[3];
         var expected = new int[]{1, 1, 1};
@@ -80,7 +80,7 @@ public class AppTests {
     void addTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var data = new int[]{1, 2, 3};
         var expected = new int[]{1, 2, 3};
@@ -97,7 +97,7 @@ public class AppTests {
     void largestPartSumTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var data = new int[]{1, 2, 3, 4};
         app.largestPartSum(data);
@@ -146,7 +146,7 @@ public class AppTests {
     void arraysAddTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var result = app.arraysAdd(new int[]{1, 2}, new int[]{1, 2, 3, 4}, new int[]{1, 2, 3, 4, 5});
         var expected = new int[]{3, 6, 6, 8, 5};
@@ -165,7 +165,7 @@ public class AppTests {
     void findPointTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var result = app.findPoint(new int[]{1, 1, 1, 1});
         var expected = 2;
@@ -200,7 +200,7 @@ public class AppTests {
     void isOrderedTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var result = app.isOrdered(new int[]{1, 2, 3, 4}, false);
         var expected = 1;
@@ -227,7 +227,7 @@ public class AppTests {
     void swapTest() {
         final var outputStream = new ByteArrayOutputStream();
         final var printStream = new PrintStream(outputStream);
-        final var app = App.build(printStream);
+        final var app = new App(printStream);
 
         var arr = new int[]{1, 2, 3, 4};
         app.swap(arr);

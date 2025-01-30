@@ -7,24 +7,21 @@ public class App {
         throw new UnsupportedOperationException(String.format("Used unsupported default %s constructor", this.getClass().getName()));
     }
 
-    public static App build(PrintStream anOut) {
-        return new App(anOut);
-    }
 
     private final PrintStream out;
 
-    private App(PrintStream anOut) {
+    public App(PrintStream anOut) {
         out = anOut;
     }
 
-    void printString(int times, String string) {
+    public void printString(int times, String string) {
         for (int i = 0; i < times; i++) {
             out.print(string);
         }
         out.println();
     }
 
-    void sum(int[] elements) {
+    public void sum(int[] elements) {
         var result = 0;
         for (int i = 0; i < elements.length; i++) {
             var element = elements[i];
@@ -35,19 +32,19 @@ public class App {
         out.println(result);
     }
 
-    void fill(int value, int[] elements) {
+    public void fill(int value, int[] elements) {
         for (int i = 0; i < elements.length; i++) {
             elements[i] = value;
         }
     }
 
-    void add(int value, int[] elements) {
+    public void add(int value, int[] elements) {
         for (int i = 0; i < elements.length; i++) {
             elements[i] += value;
         }
     }
 
-    int[] arraysAdd(int[]... args) {
+    public int[] arraysAdd(int[]... args) {
         var max = new int[0];
         for (int i = 0; i < args.length; i++) {
             if (max.length < args[i].length) {
@@ -64,7 +61,7 @@ public class App {
         return result;
     }
 
-    void largestPartSum(int[] elements) {
+    public void largestPartSum(int[] elements) {
         if (elements.length < 2) {
             out.println();
             return;
@@ -97,7 +94,7 @@ public class App {
         out.println(secondHalfSum);
     }
 
-    int findPoint(int[] arr) {
+    public int findPoint(int[] arr) {
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             sum += arr[i];
@@ -120,7 +117,7 @@ public class App {
      * @param isDescending
      * @return 1 - true, 0 - false, -1 - some error
      */
-    int isOrdered(int[] arr, boolean isDescending) {
+    public int isOrdered(int[] arr, boolean isDescending) {
         if (arr.length == 0) {
             return -1;
         }
@@ -143,7 +140,7 @@ public class App {
         return 1;
     }
 
-    void swap(int[] arr) {
+    public void swap(int[] arr) {
         for (int i = 0; i < arr.length / 2; i++) {
             int first = arr[i];
             int second = arr[arr.length - 1 - i];

@@ -37,6 +37,12 @@ public class App {
         }
     }
 
+    public void eye(int[][]arr, int value){
+        for(int i = 0; i < arr.length; i++){
+            arr[i][i] = value;
+        }
+    }
+
     public static void main(String[] args) {
 
     }

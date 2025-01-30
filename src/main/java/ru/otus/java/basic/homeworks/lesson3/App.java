@@ -37,10 +37,23 @@ public class App {
         }
     }
 
-    public void eye(int[][]arr, int value){
-        for(int i = 0; i < arr.length; i++){
+    public void eye(int[][] arr, int value) {
+        for (int i = 0; i < arr.length; i++) {
             arr[i][i] = value;
         }
+    }
+
+    public int findMax(int[][] arr) {
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                var el = arr[i][j];
+                if (result < el) {
+                    result = el;
+                }
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {

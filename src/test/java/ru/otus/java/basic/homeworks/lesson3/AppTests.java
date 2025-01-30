@@ -100,4 +100,15 @@ public class AppTests {
         expected = new int[][]{{1}};
         Assertions.assertArrayEquals(expected, arr);
     }
+
+    @Test
+    void findMaxTest() {
+        final var outputStream = new ByteArrayOutputStream();
+        final var printStream = new PrintStream(outputStream);
+        final var app = new App(printStream);
+
+        final var arr = new int[][]{{-1, -2, Integer.MIN_VALUE}, {1, 2, 3}, {4, 5, 6}};
+        final var result = app.findMax(arr);
+        Assertions.assertEquals(6, result);
+    }
 }

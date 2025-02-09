@@ -42,6 +42,5 @@ public class UserTests {
         final var expected = "ФИО: Ivan Danilchenko Sergeevich\nГод рождения: 1990\ne-mail: dobrogovremeny@gmail.com\n";
         final var result = outputStream.toString(Charset.defaultCharset());
         Assertions.assertEquals(expected, result);
-
     }
 }

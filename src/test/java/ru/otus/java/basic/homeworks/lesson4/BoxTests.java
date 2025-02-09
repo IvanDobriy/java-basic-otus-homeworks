@@ -1,11 +1,27 @@
 package ru.otus.java.basic.homeworks.lesson4;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BoxTests {
+
+    private final PrintStream initialOut = System.out;
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private final PrintStream printStream = new PrintStream(outputStream);
+
+    @BeforeEach
+    void beforeEach() {
+        System.setOut(printStream);
+    }
+
+    @AfterEach
+    void afterEach() {
+        outputStream.reset();
+        System.setOut(initialOut);
+    }
 
     @Test
     void fieldsTest() {
@@ -59,6 +75,20 @@ public class BoxTests {
         mediumBox.putContent(smallBox);
         largeBox.putContent(mediumBox);
         largeBox.printInfo();
+        final var expected = "Box\n" +
+                "size width: 1000, height: 1000, length: 1000, description: Large\n" +
+                "color name: Black, code: 0\n" +
+                "is opened: true\n" +
+                "contains box: Box\n" +
+                "size width: 500, height: 500, length: 500, description: Medium\n" +
+                "color name: Black, code: 0\n" +
+                "is opened: true\n" +
+                "contains box: Box\n" +
+                "size width: 100, height: 100, length: 100, description: Small\n" +
+                "color name: Black, code: 0\n" +
+                "is opened: true\n" +
+                "is empty\n";
+        Assertions.assertEquals(expected, outputStream.toString());
 
         final var largeBoxContent = largeBox.removeContent();
         final var nextContent = largeBoxContent.removeContent();
@@ -106,5 +136,16 @@ public class BoxTests {
         mediumBox.close();
         final var exception = Assertions.assertThrows(RuntimeException.class, mediumBox::removeContent);
         Assertions.assertEquals("Box is closed", exception.getMessage());
+    }
+
+    @Test
+    void putContentIfBoxContainsSmth(){
+        final var smallBox = new Box(Size.SMALL, Color.BLACK, true);
+        final var mediumBox = new Box(Size.MEDIUM, Color.BLACK, true);
+        mediumBox.putContent(smallBox);
+        final var exception = Assertions.assertThrows(RuntimeException.class, ()->{
+            mediumBox.putContent(smallBox); // hah ))
+        });
+        Assertions.assertEquals("Box is full", exception.getMessage());
     }
 }

@@ -62,6 +62,9 @@ public class Box {
         if (!isOpened) {
             throw new RuntimeException("Box is closed");
         }
+        if(!Objects.isNull(content)){
+            throw new RuntimeException("Box is full");
+        }
         if (!canContain(aBox)) {
             throw new RuntimeException(String.format("Box: %s can`t contain aBox: %s", size,  aBox.size));
         }

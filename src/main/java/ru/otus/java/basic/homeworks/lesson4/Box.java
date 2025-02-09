@@ -2,7 +2,7 @@ package ru.otus.java.basic.homeworks.lesson4;
 
 import java.util.Objects;
 
-public class Box {
+public class Box implements IBox {
 
     private final Size size;
     private Color color;
@@ -18,31 +18,38 @@ public class Box {
         this.isOpened = isOpened;
     }
 
+    @Override
     public Size getSize() {
         return size;
     }
 
+    @Override
     public Color getColor() {
         return color;
     }
 
+    @Override
     public void setColor(Color aColor) {
         Objects.requireNonNull(aColor);
         color = aColor;
     }
 
+    @Override
     public boolean isOpened() {
         return isOpened;
     }
 
+    @Override
     public void open() {
         isOpened = true;
     }
 
+    @Override
     public void close() {
         isOpened = false;
     }
 
+    @Override
     public boolean canContain(Box aBox) {
         Objects.requireNonNull(aBox);
         if (aBox.size.getLength() >= size.getLength()) {
@@ -57,20 +64,22 @@ public class Box {
         return true;
     }
 
+    @Override
     public void putContent(Box aBox) {
         Objects.requireNonNull(aBox);
         if (!isOpened) {
             throw new RuntimeException("Box is closed");
         }
-        if(!Objects.isNull(content)){
+        if (!Objects.isNull(content)) {
             throw new RuntimeException("Box is full");
         }
         if (!canContain(aBox)) {
-            throw new RuntimeException(String.format("Box: %s can`t contain aBox: %s", size,  aBox.size));
+            throw new RuntimeException(String.format("Box: %s can`t contain aBox: %s", size, aBox.size));
         }
         content = aBox;
     }
 
+    @Override
     public Box removeContent() {
         if (Objects.isNull(content)) {
             throw new RuntimeException("Box is empty");
@@ -83,6 +92,7 @@ public class Box {
         return currentBox;
     }
 
+    @Override
     public String getInfo() {
         final var template = new StringBuilder("Box")
                 .append("\n")
@@ -100,6 +110,7 @@ public class Box {
         return template.toString();
     }
 
+    @Override
     public void printInfo() {
         System.out.println(getInfo());
     }

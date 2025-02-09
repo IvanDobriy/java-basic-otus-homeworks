@@ -15,11 +15,11 @@ public interface IBox {
 
     void close();
 
-    boolean canContain(Box aBox);
+    boolean canContain(IBox aBox);
 
-    void putContent(Box aBox);
+    void putContent(IBox aBox);
 
-    Box removeContent();
+    IBox removeContent();
 
     String getInfo();
 

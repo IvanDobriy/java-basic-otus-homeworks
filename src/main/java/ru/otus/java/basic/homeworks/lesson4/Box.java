@@ -8,7 +8,7 @@ public class Box implements IBox {
     private Color color;
     private boolean isOpened;
 
-    private Box content;
+    private IBox content;
 
     public Box(Size aSize, Color aColor, boolean isOpened) {
         Objects.requireNonNull(aSize);
@@ -50,22 +50,22 @@ public class Box implements IBox {
     }
 
     @Override
-    public boolean canContain(Box aBox) {
+    public boolean canContain(IBox aBox) {
         Objects.requireNonNull(aBox);
-        if (aBox.size.getLength() >= size.getLength()) {
+        if (aBox.getSize().getLength() >= size.getLength()) {
             return false;
         }
-        if (aBox.size.getWidth() >= size.getWidth()) {
+        if (aBox.getSize().getWidth() >= size.getWidth()) {
             return false;
         }
-        if (aBox.size.getHeight() >= size.getHeight()) {
+        if (aBox.getSize().getHeight() >= size.getHeight()) {
             return false;
         }
         return true;
     }
 
     @Override
-    public void putContent(Box aBox) {
+    public void putContent(IBox aBox) {
         Objects.requireNonNull(aBox);
         if (!isOpened) {
             throw new RuntimeException("Box is closed");
@@ -74,13 +74,13 @@ public class Box implements IBox {
             throw new RuntimeException("Box is full");
         }
         if (!canContain(aBox)) {
-            throw new RuntimeException(String.format("Box: %s can`t contain aBox: %s", size, aBox.size));
+            throw new RuntimeException(String.format("Box: %s can`t contain aBox: %s", size, aBox.getSize()));
         }
         content = aBox;
     }
 
     @Override
-    public Box removeContent() {
+    public IBox removeContent() {
         if (Objects.isNull(content)) {
             throw new RuntimeException("Box is empty");
         }

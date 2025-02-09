@@ -1,9 +1,10 @@
 package ru.otus.java.basic.homeworks.lesson4;
 
 import java.time.ZonedDateTime;
+import java.util.logging.Logger;
 
 public class App {
-    public static void main(String[] args) {
+    public static void userExample(){
         final var users = new User[]{
                 new User("Petrov", "Ivan", "Sergeevich", 1990, "petrov@mail.com"),
                 new User("Chugunov", "Petr", "Ivanovich", 1980, "chugunov@mail.com"),
@@ -23,5 +24,18 @@ public class App {
                 user.printUserInfo();
             }
         }
+    }
+    public static void boxExample(){
+        final var smallBox = new BoxProfiler(new Box(Size.SMALL, Color.BLACK, true));
+        final var mediumBox = new BoxProfiler( new Box(Size.MEDIUM, Color.BLACK, true));
+        final var largeBox = new BoxProfiler(new Box(Size.LARGE, Color.BLACK, true));
+        mediumBox.putContent(smallBox);
+        largeBox.putContent(mediumBox);
+        largeBox.printInfo();
+    }
+
+    public static void main(String[] args) {
+        userExample();
+        boxExample();
     }
 }

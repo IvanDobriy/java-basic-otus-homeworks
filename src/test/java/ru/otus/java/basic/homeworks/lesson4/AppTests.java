@@ -23,8 +23,8 @@ public class AppTests {
     }
 
     @Test
-    void mainTest() {
-        App.main(new String[]{});
+    void userExampleTest() {
+        App.userExample();
         final var expected = "ФИО: Petr Chugunov Ivanovich\nГод рождения: 1980\ne-mail: chugunov@mail.com\n"
                 + "ФИО: Ivan Ivanov Vasilievich\nГод рождения: 1970\ne-mail: ivanov@mail.com\n";
         final var result = outputStream.toString();

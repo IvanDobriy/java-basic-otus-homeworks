@@ -35,4 +35,9 @@ public enum Size {
     private int height;
     private int length;
     private String description;
+
+    @Override
+    public String toString() {
+        return String.format("size width: %d, height: %d, length: %d, description: %s", width, height, length, description);
+    }
 }

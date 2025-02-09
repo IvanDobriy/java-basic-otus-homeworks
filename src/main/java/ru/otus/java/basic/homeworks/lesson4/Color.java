@@ -19,4 +19,9 @@ public enum Color {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return String.format("color name: %s, code: %d", name, code);
+    }
 }

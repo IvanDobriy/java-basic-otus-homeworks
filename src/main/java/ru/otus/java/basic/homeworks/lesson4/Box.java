@@ -1,5 +1,7 @@
 package ru.otus.java.basic.homeworks.lesson4;
 
+import java.util.Objects;
+
 public class Box {
 
     private final Size size;
@@ -9,6 +11,8 @@ public class Box {
     private Box box;
 
     public Box(Size aSize, Color aColor, boolean isOpened) {
+        Objects.requireNonNull(aSize);
+        Objects.requireNonNull(aColor);
         size = aSize;
         color = aColor;
         this.isOpened = isOpened;
@@ -23,6 +27,7 @@ public class Box {
     }
 
     public void setColor(Color aColor) {
+        Objects.requireNonNull(aColor);
         color = aColor;
     }
 
@@ -31,27 +36,32 @@ public class Box {
     }
 
     public void open() {
+        System.out.println("open");
         isOpened = true;
     }
 
     public void close() {
+        System.out.println("close");
         isOpened = false;
     }
 
-    public boolean canContain(Box box) {
-        if (box.size.getLength() >= size.getLength()) {
+    public boolean canContain(Box aBox) {
+        Objects.requireNonNull(aBox);
+        if (aBox.size.getLength() >= size.getLength()) {
             return false;
         }
-        if (box.size.getWidth() >= size.getWidth()) {
+        if (aBox.size.getWidth() >= size.getWidth()) {
             return false;
         }
-        if (box.size.getHeight() >= size.getHeight()) {
+        if (aBox.size.getHeight() >= size.getHeight()) {
             return false;
         }
         return true;
     }
 
     public boolean putBox(Box aBox) {
+        System.out.println("putBox");
+        Objects.requireNonNull(aBox);
         if (!isOpened) {
             return false;
         }
@@ -63,14 +73,14 @@ public class Box {
     }
 
     public Box getBox() {
+        System.out.println("getBox");
         return box;
     }
 
     public String getInfo() {
         final var template = new StringBuilder("Box\n");
-        template.append(String.format("size: %dx%dx%d, description: %s\n",
-                size.getWidth(), size.getHeight(), size.getLength(), size.getDescription()));
-        template.append(String.format("color code: %d, name: %s\n", color.getCode(), color.getName()));
+        template.append(size.toString());
+        template.append(color.toString());
         template.append(String.format("is opened: %b\n", isOpened));
         if (box != null) {
             template.append(String.format("contains box: %s", box.getInfo()));

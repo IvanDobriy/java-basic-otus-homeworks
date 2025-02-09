@@ -1,8 +1,8 @@
 package ru.otus.java.basic.homeworks.lesson4;
 
 public enum Color {
-    BLACK(0, "Черный"),
-    WHITE(1, "Белый");
+    BLACK(0, "Black"),
+    WHITE(1, "White");
 
     private int code;
     private String name;

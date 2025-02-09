@@ -8,7 +8,7 @@ public class Box {
     private Color color;
     private boolean isOpened;
 
-    private Box box;
+    private Box content;
 
     public Box(Size aSize, Color aColor, boolean isOpened) {
         Objects.requireNonNull(aSize);
@@ -59,7 +59,7 @@ public class Box {
         return true;
     }
 
-    public boolean putBox(Box aBox) {
+    public boolean putContent(Box aBox) {
         System.out.println("putBox");
         Objects.requireNonNull(aBox);
         if (!isOpened) {
@@ -68,13 +68,14 @@ public class Box {
         if (!canContain(aBox)) {
             return false;
         }
-        box = aBox;
+        content = aBox;
         return true;
     }
 
-    public Box getBox() {
-        System.out.println("getBox");
-        return box;
+    public Box removeContent() {
+        final var currentBox = content;
+        content = null;
+        return currentBox;
     }
 
     public String getInfo() {
@@ -82,8 +83,8 @@ public class Box {
         template.append(size.toString());
         template.append(color.toString());
         template.append(String.format("is opened: %b\n", isOpened));
-        if (box != null) {
-            template.append(String.format("contains box: %s", box.getInfo()));
+        if (content != null) {
+            template.append(String.format("contains box: %s", content.getInfo()));
         } else {
             template.append("is empty");
         }

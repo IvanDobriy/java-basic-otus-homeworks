@@ -36,12 +36,10 @@ public class Box {
     }
 
     public void open() {
-        System.out.println("open");
         isOpened = true;
     }
 
     public void close() {
-        System.out.println("close");
         isOpened = false;
     }
 
@@ -59,31 +57,39 @@ public class Box {
         return true;
     }
 
-    public boolean putContent(Box aBox) {
-        System.out.println("putBox");
+    public void putContent(Box aBox) {
         Objects.requireNonNull(aBox);
         if (!isOpened) {
-            return false;
+            throw new RuntimeException("Box is closed");
         }
         if (!canContain(aBox)) {
-            return false;
+            throw new RuntimeException(String.format("Box: %s can`t contain aBox: %s", size,  aBox.size));
         }
         content = aBox;
-        return true;
     }
 
     public Box removeContent() {
+        if (Objects.isNull(content)) {
+            throw new RuntimeException("Box is empty");
+        }
+        if (!isOpened) {
+            throw new RuntimeException("Box is closed");
+        }
         final var currentBox = content;
         content = null;
         return currentBox;
     }
 
     public String getInfo() {
-        final var template = new StringBuilder("Box\n");
-        template.append(size.toString());
-        template.append(color.toString());
-        template.append(String.format("is opened: %b\n", isOpened));
-        if (content != null) {
+        final var template = new StringBuilder("Box")
+                .append("\n")
+                .append(size)
+                .append("\n")
+                .append(color)
+                .append("\n")
+                .append(String.format("is opened: %b", isOpened))
+                .append("\n");
+        if (!Objects.isNull(content)) {
             template.append(String.format("contains box: %s", content.getInfo()));
         } else {
             template.append("is empty");

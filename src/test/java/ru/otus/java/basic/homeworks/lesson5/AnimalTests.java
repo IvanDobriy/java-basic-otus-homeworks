@@ -105,4 +105,51 @@ public class AnimalTests {
         final var expected = "Horse description: name: Valya, runSpeed: 1, swimSpeed: 1, stamina: 10\n";
         Assertions.assertEquals(expected, result);
     }
+
+    @Test
+    void illegalConstructorArguments() {
+        var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Dog("Rich", -1, 1, 1);
+        });
+        Assertions.assertEquals("aRunSpeed < 0", exception.getMessage());
+        exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Dog("Rich", 1, -1, 1);
+        });
+        Assertions.assertEquals("aSwimSpeed < 0", exception.getMessage());
+        exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Dog("Rich", 1, 1, -1);
+        });
+        Assertions.assertEquals("aStamina < 0", exception.getMessage());
+    }
+
+    @Test
+    void illegalRunArguments() {
+        final var animals = new Animal[]{
+                new Dog("Irma", 1, 1, 10),
+                new Cat("Muska", 1, 1, 10),
+                new Horse("Valya", 1, 1, 10),
+        };
+        for (int i = 0; i < animals.length; i++) {
+            final var animal = animals[i];
+            final var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                animal.run(-1);
+            });
+            Assertions.assertEquals("distance < 0", exception.getMessage());
+        }
+    }
+
+    @Test
+    void illegalSwimArguments(){
+        final var animals = new Animal[]{
+                new Dog("Irma", 1, 1, 10),
+                new Horse("Valya", 1, 1, 10),
+        };
+        for (int i = 0; i < animals.length; i++) {
+            final var animal = animals[i];
+            final var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                animal.swim(-1);
+            });
+            Assertions.assertEquals("distance < 0", exception.getMessage());
+        }
+    }
 }

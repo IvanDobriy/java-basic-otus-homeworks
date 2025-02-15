@@ -40,4 +40,11 @@ public class CatTests {
         Assertions.assertTrue(cat.isFull());
         Assertions.assertEquals(9, plate.getCurrentAmount());
     }
+
+    @Test
+    void toStringTest() {
+        final var cat = new Cat("Muska", 10);
+        final var expected = "Cat{name:Muska,appetite:10}";
+        Assertions.assertEquals(expected, cat.toString());
+    }
 }

@@ -27,4 +27,9 @@ public class Cat {
     public void eat(Plate plate) {
         appetite -= plate.removeContent(appetite);
     }
+
+    @Override
+    public String toString(){
+        return String.format("Cat{name:%s,appetite:%d}", name, appetite);
+    }
 }

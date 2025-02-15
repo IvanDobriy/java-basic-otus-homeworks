@@ -37,4 +37,8 @@ public class Plate {
         currentAmount = Math.max(0, newAmount);
         return oldAmount - currentAmount;
     }
+    @Override
+    public String toString(){
+        return String.format("Plate{capacity:%d,currentAmount:%d}", capacity, currentAmount);
+    }
 }

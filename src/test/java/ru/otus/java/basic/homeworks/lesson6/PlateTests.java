@@ -63,4 +63,11 @@ public class PlateTests {
         });
         Assertions.assertEquals("amount < 0", exception.getMessage());
     }
+
+    @Test
+    void toStringTest(){
+        final var plate = new Plate(10);
+        final var expected = "Plate{capacity:10,currentAmount:10}";
+        Assertions.assertEquals(expected, plate.toString());
+    }
 }

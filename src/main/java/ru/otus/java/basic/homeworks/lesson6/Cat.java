@@ -25,9 +25,6 @@ public class Cat {
     }
 
     public void eat(Plate plate) {
-        if (plate.getCurrentAmount() < appetite) {
-            return;
-        }
         appetite -= plate.removeContent(appetite);
     }
 }

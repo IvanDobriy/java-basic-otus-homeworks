@@ -2,19 +2,27 @@ package ru.otus.java.basic.homeworks.lesson7.transport;
 
 import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
 
+import java.util.Objects;
+
 public class Bicycle extends ATransport {
     @Override
     public boolean move(int distance, Landscape landscape) {
-        return false;
+        if (Objects.isNull(this.getDriver())) {
+            return false;
+        }
+        if (landscape.equals(Landscape.SWAMP)) {
+            return false;
+        }
+        return spendEnergy(distance) >= 0;
     }
 
     @Override
     public int spendEnergy(int amount) {
-        return 0;
+        return getDriver().spendEnergy(amount);
     }
 
     @Override
     public int getEnergy() {
-        return 0;
+        return getDriver().getEnergy();
     }
 }

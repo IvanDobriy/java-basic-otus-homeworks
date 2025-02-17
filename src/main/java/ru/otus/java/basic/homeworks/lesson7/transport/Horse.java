@@ -30,7 +30,6 @@ public class Horse extends ATransport {
         if (landscape.equals(Landscape.SWAMP)) {
             return false;
         }
-        int remains = spendEnergy(distance);
-        return remains >= 0;
+        return spendEnergy(distance) >= 0;
     }
 }

@@ -37,7 +37,7 @@ public class Human implements IDriver {
     @Override
     public boolean getIn(ITransport transport) {
         Objects.requireNonNull(transport);
-        if (!Objects.isNull(currentTransport)) {
+        if (!Objects.isNull(currentTransport) && currentTransport != transport) {
             return false;
         }
         currentTransport = transport;

@@ -10,7 +10,7 @@ public abstract class ATransport implements ITransport {
     @Override
     public boolean place(IDriver driver) {
         Objects.requireNonNull(driver);
-        if (!Objects.isNull(currentDriver)) {
+        if (!Objects.isNull(currentDriver) && currentDriver != driver) {
             return false;
         }
         final var transport = driver.getTransport();

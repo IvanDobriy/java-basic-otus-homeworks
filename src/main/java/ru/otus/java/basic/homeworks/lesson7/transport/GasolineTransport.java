@@ -3,6 +3,10 @@ package ru.otus.java.basic.homeworks.lesson7.transport;
 public abstract class GasolineTransport extends ATransport {
     private int gasoline = 0;
 
+    protected GasolineTransport(int gasoline){
+        this.gasoline = gasoline;
+    }
+
     @Override
     public int spendEnergy(int amount) {
         if (amount < 0) {

@@ -6,10 +6,17 @@ import java.util.Objects;
 
 public abstract class ATransport implements ITransport {
     private IDriver currentDriver;
+
     @Override
     public boolean place(IDriver driver) {
         Objects.requireNonNull(driver);
         if (!Objects.isNull(currentDriver)) {
+            return false;
+        }
+        final var transport = driver.getTransport();
+        if (Objects.isNull(transport)) {
+            driver.getIn(this);
+        } else if (!transport.equals(this)) {
             return false;
         }
         currentDriver = driver;

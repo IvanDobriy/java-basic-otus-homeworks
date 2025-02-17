@@ -11,8 +11,9 @@ public class Human implements IDriver {
 
     private ITransport currentTransport;
 
-    public Human(String name) {
+    public Human(String name, int energy) {
         this.name = name;
+        this.energy = energy;
     }
 
     @Override

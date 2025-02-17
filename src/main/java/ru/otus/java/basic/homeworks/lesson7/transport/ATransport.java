@@ -16,7 +16,7 @@ public abstract class ATransport implements ITransport {
         final var transport = driver.getTransport();
         if (Objects.isNull(transport)) {
             driver.getIn(this);
-        } else if (!transport.equals(this)) {
+        } else if (transport != this) {
             return false;
         }
         currentDriver = driver;

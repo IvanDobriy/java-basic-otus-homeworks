@@ -6,6 +6,7 @@ import ru.otus.java.basic.homeworks.lesson7.transport.ITransport;
 import java.util.Objects;
 
 public class Human implements IDriver {
+    private int energy;
     private final String name;
 
     private ITransport currentTransport;
@@ -27,9 +28,9 @@ public class Human implements IDriver {
     @Override
     public boolean move(int distance, Landscape landscape) {
         if (Objects.isNull(currentTransport)) {
-            //TODO self moving
+            return spendEnergy(distance) >= 0;
         }
-        return false;
+        return currentTransport.move(distance, landscape);
     }
 
     @Override
@@ -56,11 +57,16 @@ public class Human implements IDriver {
 
     @Override
     public int spendEnergy(int amount) {
-        return 0;
+        if (amount < 0) {
+            throw new IllegalArgumentException("amount < 0");
+        }
+        int remains = energy - amount;
+        energy = Math.max(0, remains);
+        return remains;
     }
 
     @Override
     public int getEnergy() {
-        return 0;
+        return energy;
     }
 }

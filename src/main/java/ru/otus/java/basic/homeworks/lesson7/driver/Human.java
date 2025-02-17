@@ -47,6 +47,9 @@ public class Human implements IDriver {
     public ITransport getOut() {
         final var transport = currentTransport;
         currentTransport = null;
+        if(!Objects.isNull(transport.getDriver())){
+            transport.remove();
+        }
         return transport;
     }
 

@@ -41,7 +41,7 @@ public class Human implements IDriver {
             return false;
         }
         currentTransport = transport;
-        if( currentTransport.place(this)){
+        if (currentTransport.place(this)) {
             return true;
         }
         currentTransport = null;
@@ -52,7 +52,7 @@ public class Human implements IDriver {
     public ITransport getOut() {
         final var transport = currentTransport;
         currentTransport = null;
-        if(!Objects.isNull(transport.getDriver())){
+        if (!Objects.isNull(transport.getDriver())) {
             transport.remove();
         }
         return transport;
@@ -60,7 +60,7 @@ public class Human implements IDriver {
 
     @Override
     public String toString() {
-        return String.format("%s{name:%s,currentTransport:%s}", this.getClass().getName(), name, currentTransport);
+        return String.format("%s{name:%s,energy:%d,currentTransport:%s}", this.getClass().getName(), name, energy, currentTransport);
     }
 
     @Override

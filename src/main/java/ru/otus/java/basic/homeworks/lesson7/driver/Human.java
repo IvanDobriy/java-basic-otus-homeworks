@@ -41,7 +41,11 @@ public class Human implements IDriver {
             return false;
         }
         currentTransport = transport;
-        return currentTransport.place(this);
+        if( currentTransport.place(this)){
+            return true;
+        }
+        currentTransport = null;
+        return false;
     }
 
     @Override

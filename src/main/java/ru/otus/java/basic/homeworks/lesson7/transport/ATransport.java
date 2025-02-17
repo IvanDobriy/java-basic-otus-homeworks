@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public abstract class ATransport implements ITransport {
     private IDriver currentDriver;
-
     @Override
     public boolean place(IDriver driver) {
         Objects.requireNonNull(driver);

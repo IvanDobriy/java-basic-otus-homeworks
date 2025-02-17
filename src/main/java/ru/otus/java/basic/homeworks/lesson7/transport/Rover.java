@@ -7,4 +7,14 @@ public class Rover extends ATransport {
     public boolean move(int distance, Landscape landscape) {
         return true;
     }
+
+    @Override
+    public int spendEnergy(int amount) {
+        return 0;
+    }
+
+    @Override
+    public int getEnergy() {
+        return 0;
+    }
 }

@@ -53,4 +53,14 @@ public class Human implements IDriver {
     public String toString() {
         return String.format("%s{name:%s,currentTransport:%s}", this.getClass().getName(), name, currentTransport);
     }
+
+    @Override
+    public int spendEnergy(int amount) {
+        return 0;
+    }
+
+    @Override
+    public int getEnergy() {
+        return 0;
+    }
 }

@@ -7,4 +7,14 @@ public class Bicycle extends ATransport {
     public boolean move(int distance, Landscape landscape) {
         return false;
     }
+
+    @Override
+    public int spendEnergy(int amount) {
+        return 0;
+    }
+
+    @Override
+    public int getEnergy() {
+        return 0;
+    }
 }

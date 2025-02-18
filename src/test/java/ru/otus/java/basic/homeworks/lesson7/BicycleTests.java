@@ -26,13 +26,28 @@ public class BicycleTests {
 
     @Test
     void placeRemoveTests() {
-        final var human =  new Human("Ivan", 10);
+        final var human = new Human("Ivan", 10);
         final var bicycle = new Bicycle();
         bicycle.place(human);
         Assertions.assertEquals(human, bicycle.getDriver());
         Assertions.assertEquals(bicycle, human.getTransport());
         final var driver = bicycle.remove();
         Assertions.assertEquals(human, driver);
-//        Assertions.assertNull();
+        Assertions.assertNull(bicycle.getDriver());
+        Assertions.assertNull(human.getTransport());
+    }
+
+    @Test
+    void placeDriverIsNull() {
+        final var bicycle = new Bicycle();
+        Assertions.assertThrows(NullPointerException.class, () -> {
+           bicycle.place(null);
+        });
+    }
+
+    @Test
+    void removeDriverIsNull() {
+        final var bicycle = new Bicycle();
+        Assertions.assertNull(bicycle.remove());
     }
 }

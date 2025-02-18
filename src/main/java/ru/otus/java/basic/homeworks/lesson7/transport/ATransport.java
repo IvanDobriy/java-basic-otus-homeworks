@@ -25,6 +25,9 @@ public abstract class ATransport implements ITransport {
 
     @Override
     public IDriver remove() {
+        if(Objects.isNull(currentDriver)){
+            return null;
+        }
         final var driver = currentDriver;
         currentDriver = null;
         if (!Objects.isNull(driver.getTransport())) {

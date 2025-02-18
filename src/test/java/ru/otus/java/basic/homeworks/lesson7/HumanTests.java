@@ -19,7 +19,7 @@ public class HumanTests {
     }
 
     @Test
-    void toStringTest(){
+    void toStringTest() {
         final var human = new Human("Ivan", 10);
         final ITransport bicycle = new Bicycle();
         human.getIn(bicycle);
@@ -40,15 +40,15 @@ public class HumanTests {
     }
 
     @Test
-    void getInTransportIsNull(){
+    void getInTransportIsNull() {
         final var human = new Human("Ivan", 10);
-        Assertions.assertThrows(NullPointerException.class, ()->{
+        Assertions.assertThrows(NullPointerException.class, () -> {
             human.getIn(null);
         });
     }
 
     @Test
-    void repeatGetInWithSameTransport(){
+    void repeatGetInWithSameTransport() {
         final var human = new Human("Ivan", 10);
         final ITransport transport = new Bicycle();
         human.getIn(transport);
@@ -59,7 +59,7 @@ public class HumanTests {
     }
 
     @Test
-    void repeatGetInWithDifferentTransport(){
+    void repeatGetInWithDifferentTransport() {
         final var human = new Human("Ivan", 10);
         final ITransport transport1 = new Bicycle();
         final ITransport transport2 = new Bicycle();
@@ -72,7 +72,7 @@ public class HumanTests {
     }
 
     @Test
-    void getInWithOccupiedTransport(){
+    void getInWithOccupiedTransport() {
         final var human1 = new Human("Ivan", 10);
         final ITransport transport1 = new Bicycle();
         human1.getIn(transport1);
@@ -88,6 +88,31 @@ public class HumanTests {
     void moveTest() {
         final var human = new Human("Ivan", 10);
         var result = human.move(1, Landscape.PLAIN);
+        Assertions.assertTrue(result);
+        var energy = human.getEnergy();
+        Assertions.assertEquals(9, energy);
+
+        result = human.move(10, Landscape.PLAIN);
+        energy = human.getEnergy();
+        Assertions.assertFalse(result);
+        Assertions.assertEquals(0, energy);
     }
 
+    @Test
+    void landscapeTest() {
+        final var human = new Human("Ivan", 10);
+        Assertions.assertTrue(human.move(1, Landscape.PLAIN));
+        Assertions.assertTrue(human.move(1, Landscape.SWAMP));
+        Assertions.assertTrue(human.move(1, Landscape.WOODLAND));
+        Assertions.assertEquals(7, human.getEnergy());
+    }
+
+    @Test
+    void spendEnergyTest() {
+        final var human = new Human("Ivan", 10);
+        Assertions.assertEquals(9, human.spendEnergy(1));
+        Assertions.assertEquals(9, human.getEnergy());
+        Assertions.assertEquals(-1, human.spendEnergy(10));
+        Assertions.assertEquals(0, human.getEnergy());
+    }
 }

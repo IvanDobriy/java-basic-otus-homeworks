@@ -21,4 +21,9 @@ public abstract class GasolineTransport extends ATransport {
     public int getEnergy() {
         return gasoline;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s{currentDriver:%s,gasoline:%d}", this.getClass().getName(), getDriver().getName(), gasoline);
+    }
 }

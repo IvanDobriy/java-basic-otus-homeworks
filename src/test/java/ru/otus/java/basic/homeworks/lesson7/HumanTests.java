@@ -23,7 +23,7 @@ public class HumanTests {
         final var human = new Human("Ivan", 10);
         final ITransport bicycle = new Bicycle();
         human.getIn(bicycle);
-        Assertions.assertEquals("", bicycle);
+        Assertions.assertEquals("ru.otus.java.basic.homeworks.lesson7.transport.Bicycle{currentDriver:Ivan}", bicycle.toString());
     }
 
     @Test

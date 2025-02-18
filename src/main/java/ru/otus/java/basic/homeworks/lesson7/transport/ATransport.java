@@ -40,6 +40,6 @@ public abstract class ATransport implements ITransport {
 
     @Override
     public String toString() {
-        return String.format("%s{currentDriver:%s}", this.getClass().getName(), currentDriver);
+        return String.format("%s{currentDriver:%s}", this.getClass().getName(), currentDriver.getName());
     }
 }

@@ -1,9 +1,11 @@
 package ru.otus.java.basic.homeworks.lesson7.transport;
 
+import java.util.Objects;
+
 public abstract class GasolineTransport extends ATransport {
     private int gasoline = 0;
 
-    protected GasolineTransport(int gasoline){
+    protected GasolineTransport(int gasoline) {
         this.gasoline = gasoline;
     }
 
@@ -24,6 +26,10 @@ public abstract class GasolineTransport extends ATransport {
 
     @Override
     public String toString() {
-        return String.format("%s{currentDriver:%s,gasoline:%d}", this.getClass().getName(), getDriver().getName(), gasoline);
+        String name = null;
+        if (!Objects.isNull(getDriver())) {
+            name = getDriver().getName();
+        }
+        return String.format("%s{gasoline:%d,currentDriver:%s}", this.getClass().getName(), gasoline, name);
     }
 }

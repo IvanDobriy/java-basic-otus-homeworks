@@ -12,7 +12,7 @@ import ru.otus.java.basic.homeworks.lesson7.transport.Bicycle;
 public class BicycleTests {
 
     @Test
-    void positiveTest() {
+    void creationTest() {
         final var bicycle = new Bicycle();
         Assertions.assertEquals(0, bicycle.getEnergy());
         Assertions.assertEquals("ru.otus.java.basic.homeworks.lesson7.transport.Bicycle{currentDriver:null}", bicycle.toString());

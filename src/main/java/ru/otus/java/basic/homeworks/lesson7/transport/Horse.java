@@ -7,6 +7,10 @@ import java.util.Objects;
 public class Horse extends ATransport {
     private int forces;
 
+    public Horse(int forces) {
+        this.forces = forces;
+    }
+
     @Override
     public int spendEnergy(int amount) {
         if (amount < 0) {
@@ -31,5 +35,14 @@ public class Horse extends ATransport {
             return false;
         }
         return spendEnergy(distance) >= 0;
+    }
+    @Override
+    public String toString() {
+        String name = null;
+        var driver = getDriver();
+        if (!Objects.isNull(driver)) {
+            name = driver.getName();
+        }
+        return String.format("%s{forces:%d,currentDriver:%s}", this.getClass().getName(), forces, name);
     }
 }

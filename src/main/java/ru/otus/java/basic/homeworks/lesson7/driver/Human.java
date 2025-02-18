@@ -50,6 +50,9 @@ public class Human implements IDriver {
 
     @Override
     public ITransport getOut() {
+        if(Objects.isNull(currentTransport)){
+            return null;
+        }
         final var transport = currentTransport;
         currentTransport = null;
         if (!Objects.isNull(transport.getDriver())) {

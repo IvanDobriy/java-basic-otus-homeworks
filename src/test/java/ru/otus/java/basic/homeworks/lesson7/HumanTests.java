@@ -48,6 +48,12 @@ public class HumanTests {
     }
 
     @Test
+    void getOutTransportIsNull() {
+        final var human = new Human("Ivan", 10);
+        Assertions.assertNull(human.getOut());
+    }
+
+    @Test
     void repeatGetInWithSameTransport() {
         final var human = new Human("Ivan", 10);
         final ITransport transport = new Bicycle();

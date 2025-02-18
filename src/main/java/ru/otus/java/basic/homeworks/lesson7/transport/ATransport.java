@@ -27,7 +27,7 @@ public abstract class ATransport implements ITransport {
     public IDriver remove() {
         final var driver = currentDriver;
         currentDriver = null;
-        if(!Objects.isNull(driver.getTransport())){
+        if (!Objects.isNull(driver.getTransport())) {
             driver.getOut();
         }
         return driver;
@@ -40,6 +40,10 @@ public abstract class ATransport implements ITransport {
 
     @Override
     public String toString() {
-        return String.format("%s{currentDriver:%s}", this.getClass().getName(), currentDriver.getName());
+        String name = null;
+        if (!Objects.isNull(currentDriver)) {
+            name = currentDriver.getName();
+        }
+        return String.format("%s{currentDriver:%s}", this.getClass().getName(), name);
     }
 }

@@ -18,11 +18,19 @@ public class Bicycle extends ATransport {
 
     @Override
     public int spendEnergy(int amount) {
+        final var driver = getDriver();
+        if (Objects.isNull(driver)) {
+            return -1;
+        }
         return getDriver().spendEnergy(amount);
     }
 
     @Override
     public int getEnergy() {
-        return getDriver().getEnergy();
+        final var driver = getDriver();
+        if (Objects.isNull(driver)) {
+            return 0;
+        }
+        return driver.getEnergy();
     }
 }

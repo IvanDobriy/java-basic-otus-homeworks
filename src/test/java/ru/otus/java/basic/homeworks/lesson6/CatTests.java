@@ -27,24 +27,32 @@ public class CatTests {
         var plate = new Plate(10);
         var cat = new Cat("Muska", 9);
         cat.eat(plate);
-        Assertions.assertEquals(0, cat.getAppetite());
+        Assertions.assertEquals(9, cat.getAppetite());
         Assertions.assertTrue(cat.isFull());
+        Assertions.assertEquals(1, plate.getCurrentAmount());
+
+
         plate = new Plate(10);
         cat = new Cat("Murzic",11);
         cat.eat(plate);
-        Assertions.assertEquals(1, cat.getAppetite());
+        Assertions.assertEquals(11, cat.getAppetite());
         Assertions.assertFalse(cat.isFull());
-        plate = new Plate(10);
+        Assertions.assertEquals(10, plate.getCurrentAmount());
+
+
+        plate = new Plate(11);
         cat.eat(plate);
-        Assertions.assertEquals(0, cat.getAppetite());
+        Assertions.assertEquals(11, cat.getAppetite());
         Assertions.assertTrue(cat.isFull());
-        Assertions.assertEquals(9, plate.getCurrentAmount());
+        Assertions.assertEquals(0, plate.getCurrentAmount());
     }
 
     @Test
     void toStringTest() {
         final var cat = new Cat("Muska", 10);
-        final var expected = "Cat{name:Muska,appetite:10}";
-        Assertions.assertEquals(expected, cat.toString());
+        final var plate = new Plate(10);
+        Assertions.assertEquals("Cat{name:Muska,appetite:10,isFull:false}", cat.toString());
+        cat.eat(plate);
+        Assertions.assertEquals("Cat{name:Muska,appetite:10,isFull:true}", cat.toString());
     }
 }

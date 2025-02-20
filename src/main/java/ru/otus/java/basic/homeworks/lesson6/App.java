@@ -5,8 +5,8 @@ public class App {
     public static void main(String[] args) {
         final var plates = new Plate[]{
                 new Plate(1),
-                new Plate(2),
-                new Plate(15)
+                new Plate(10),
+                new Plate(12)
         };
         final var cats = new Cat[]{
                 new Cat("Muska", 10),

@@ -25,11 +25,11 @@ public class PlateTests {
     void removeMealTest() {
         final var plate = new Plate(10);
         var result = plate.removeMeal(1);
-        Assertions.assertEquals(1, result);
+        Assertions.assertTrue( result);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(9, plate.getCurrentAmount());
         result = plate.removeMeal(10);
-        Assertions.assertEquals(9, result);
+        Assertions.assertFalse( result);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(0, plate.getCurrentAmount());
     }

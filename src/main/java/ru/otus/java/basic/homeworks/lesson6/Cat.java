@@ -1,8 +1,9 @@
 package ru.otus.java.basic.homeworks.lesson6;
 
 public class Cat {
-    private String name;
-    private int appetite;
+    private final String name;
+    private final int appetite;
+    private boolean isFull;
 
     public String getName() {
         return name;
@@ -13,7 +14,7 @@ public class Cat {
     }
 
     public boolean isFull() {
-        return appetite == 0;
+        return isFull;
     }
 
     public Cat(String name, int appetite) {
@@ -22,14 +23,19 @@ public class Cat {
         }
         this.name = name;
         this.appetite = appetite;
+        this.isFull = false;
     }
 
     public void eat(Plate plate) {
-        appetite -= plate.removeMeal(appetite);
+        if (plate.getCurrentAmount() < appetite) {
+            return;
+        }
+        plate.removeMeal(appetite);
+        isFull = true;
     }
 
     @Override
-    public String toString(){
-        return String.format("Cat{name:%s,appetite:%d}", name, appetite);
+    public String toString() {
+        return String.format("Cat{name:%s,appetite:%d,isFull:%b}", name, appetite, isFull);
     }
 }

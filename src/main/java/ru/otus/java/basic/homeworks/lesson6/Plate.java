@@ -13,7 +13,7 @@ public class Plate {
     }
 
     public Plate(int capacity) {
-        if(capacity < 0){
+        if (capacity < 0) {
             throw new IllegalArgumentException("capacity < 0");
         }
         this.capacity = capacity;
@@ -28,17 +28,21 @@ public class Plate {
         currentAmount = Math.min(newAmount, capacity);
     }
 
-    public int removeMeal(int amount) {
+    public boolean removeMeal(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount < 0");
         }
-        final int oldAmount = currentAmount;
-        currentAmount = Math.max(0, currentAmount - amount);
-        return oldAmount - currentAmount;
+        boolean result = false;
+        final var newAmount = currentAmount - amount;
+        if (newAmount >= 0) {
+            result = true;
+        }
+        currentAmount = Math.max(0, newAmount);
+        return result;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Plate{capacity:%d,currentAmount:%d}", capacity, currentAmount);
     }
 }

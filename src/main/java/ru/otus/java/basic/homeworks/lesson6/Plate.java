@@ -20,7 +20,7 @@ public class Plate {
         this.currentAmount = capacity;
     }
 
-    public void addContent(int amount) {
+    public void addMeal(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount < 0");
         }
@@ -28,15 +28,15 @@ public class Plate {
         currentAmount = Math.min(newAmount, capacity);
     }
 
-    public int removeContent(int amount) {
+    public int removeMeal(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount < 0");
         }
-        final int newAmount = currentAmount - amount;
         final int oldAmount = currentAmount;
-        currentAmount = Math.max(0, newAmount);
+        currentAmount = Math.max(0, currentAmount - amount);
         return oldAmount - currentAmount;
     }
+
     @Override
     public String toString(){
         return String.format("Plate{capacity:%d,currentAmount:%d}", capacity, currentAmount);

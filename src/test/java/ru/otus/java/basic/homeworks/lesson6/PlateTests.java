@@ -22,44 +22,44 @@ public class PlateTests {
     }
 
     @Test
-    void removeContentTest() {
+    void removeMealTest() {
         final var plate = new Plate(10);
-        var result = plate.removeContent(1);
+        var result = plate.removeMeal(1);
         Assertions.assertEquals(1, result);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(9, plate.getCurrentAmount());
-        result = plate.removeContent(10);
+        result = plate.removeMeal(10);
         Assertions.assertEquals(9, result);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(0, plate.getCurrentAmount());
     }
 
     @Test
-    void removeContentNegativeTest() {
+    void removeMealNegativeTest() {
         final var plate = new Plate(10);
         final var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            plate.removeContent(-1);
+            plate.removeMeal(-1);
         });
         Assertions.assertEquals("amount < 0", exception.getMessage());
     }
 
     @Test
-    void addContentTest() {
+    void addMealTest() {
         final var plate = new Plate(10);
-        plate.addContent(10);
+        plate.addMeal(10);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(10, plate.getCurrentAmount());
-        plate.removeContent(10);
-        plate.addContent(1);
+        plate.removeMeal(10);
+        plate.addMeal(1);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(1, plate.getCurrentAmount());
     }
 
     @Test
-    void addContentNegativeTest() {
+    void addMealNegativeTest() {
         final var plate = new Plate(10);
         final var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-           plate.addContent(-1);
+           plate.addMeal(-1);
         });
         Assertions.assertEquals("amount < 0", exception.getMessage());
     }

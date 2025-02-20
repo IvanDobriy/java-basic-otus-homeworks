@@ -25,7 +25,7 @@ public class Cat {
     }
 
     public void eat(Plate plate) {
-        appetite -= plate.removeContent(appetite);
+        appetite -= plate.removeMeal(appetite);
     }
 
     @Override

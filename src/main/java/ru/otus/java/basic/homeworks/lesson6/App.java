@@ -21,10 +21,10 @@ public class App {
                 cat.eat(plate);
             }
         }
-        for (final var plate : plates) {
+        for (Plate plate : plates) {
             System.out.println(plate);
         }
-        for (final var cat : cats) {
+        for (Cat cat : cats) {
             System.out.println(cat);
         }
     }

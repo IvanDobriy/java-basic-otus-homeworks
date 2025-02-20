@@ -1,15 +1,15 @@
 package ru.otus.java.basic.homeworks.lesson7.driver;
 
 import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
-import ru.otus.java.basic.homeworks.lesson7.transport.ITransport;
+import ru.otus.java.basic.homeworks.lesson7.transport.Transport;
 
 import java.util.Objects;
 
-public class Human implements IDriver {
+public class Human implements Driver {
     private int energy;
     private final String name;
 
-    private ITransport currentTransport;
+    private Transport currentTransport;
 
     public Human(String name, int energy) {
         this.name = name;
@@ -22,7 +22,7 @@ public class Human implements IDriver {
     }
 
     @Override
-    public ITransport getTransport() {
+    public Transport getTransport() {
         return currentTransport;
     }
 
@@ -35,7 +35,7 @@ public class Human implements IDriver {
     }
 
     @Override
-    public boolean getIn(ITransport transport) {
+    public boolean getIn(Transport transport) {
         Objects.requireNonNull(transport);
         if (!Objects.isNull(currentTransport) && currentTransport != transport) {
             return false;
@@ -49,7 +49,7 @@ public class Human implements IDriver {
     }
 
     @Override
-    public ITransport getOut() {
+    public Transport getOut() {
         if(Objects.isNull(currentTransport)){
             return null;
         }

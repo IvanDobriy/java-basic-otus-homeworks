@@ -1,12 +1,12 @@
 package ru.otus.java.basic.homeworks.lesson7.transport;
 
 import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
-import ru.otus.java.basic.homeworks.lesson7.operations.IMovable;
+import ru.otus.java.basic.homeworks.lesson7.operations.Movable;
 
-public class LoggedMovable implements IMovable {
-    private final IMovable movable;
+public class LoggedMovable implements Movable {
+    private final Movable movable;
 
-    public LoggedMovable(IMovable movable) {
+    public LoggedMovable(Movable movable) {
         this.movable = movable;
     }
 

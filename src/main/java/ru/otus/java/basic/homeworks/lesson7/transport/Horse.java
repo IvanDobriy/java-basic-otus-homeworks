@@ -4,7 +4,7 @@ import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
 
 import java.util.Objects;
 
-public class Horse extends ATransport {
+public class Horse extends AbstractTransport {
     private int forces;
 
     public Horse(int forces) {

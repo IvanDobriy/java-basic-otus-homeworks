@@ -6,7 +6,7 @@ import org.junit.jupiter.api.TestInstance;
 import ru.otus.java.basic.homeworks.lesson7.driver.Human;
 import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
 import ru.otus.java.basic.homeworks.lesson7.transport.Bicycle;
-import ru.otus.java.basic.homeworks.lesson7.transport.ITransport;
+import ru.otus.java.basic.homeworks.lesson7.transport.Transport;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class HumanTests {
@@ -21,7 +21,7 @@ public class HumanTests {
     @Test
     void toStringTest() {
         final var human = new Human("Ivan", 10);
-        final ITransport bicycle = new Bicycle();
+        final Transport bicycle = new Bicycle();
         human.getIn(bicycle);
         Assertions.assertEquals("ru.otus.java.basic.homeworks.lesson7.transport.Bicycle{currentDriver:Ivan}", bicycle.toString());
     }
@@ -29,7 +29,7 @@ public class HumanTests {
     @Test
     void getInOutTest() {
         final var human = new Human("Ivan", 10);
-        final ITransport bicycle = new Bicycle();
+        final Transport bicycle = new Bicycle();
         final var result = human.getIn(bicycle);
         Assertions.assertTrue(result);
         Assertions.assertEquals(bicycle, human.getTransport());
@@ -56,7 +56,7 @@ public class HumanTests {
     @Test
     void repeatGetInWithSameTransport() {
         final var human = new Human("Ivan", 10);
-        final ITransport transport = new Bicycle();
+        final Transport transport = new Bicycle();
         human.getIn(transport);
         final var result = human.getIn(transport);
         Assertions.assertTrue(result);
@@ -67,8 +67,8 @@ public class HumanTests {
     @Test
     void repeatGetInWithDifferentTransport() {
         final var human = new Human("Ivan", 10);
-        final ITransport transport1 = new Bicycle();
-        final ITransport transport2 = new Bicycle();
+        final Transport transport1 = new Bicycle();
+        final Transport transport2 = new Bicycle();
         human.getIn(transport1);
         final var result = human.getIn(transport2);
         Assertions.assertFalse(result);
@@ -80,7 +80,7 @@ public class HumanTests {
     @Test
     void getInWithOccupiedTransport() {
         final var human1 = new Human("Ivan", 10);
-        final ITransport transport1 = new Bicycle();
+        final Transport transport1 = new Bicycle();
         human1.getIn(transport1);
         final var human2 = new Human("John", 10);
         final var result = human2.getIn(transport1);

@@ -17,16 +17,16 @@ public class App {
                 "Pavel",
                 "Petiya"
         };
-        final var transports = new ITransport[]{
+        final var transports = new Transport[]{
                 new Car(10),
                 new Rover(10),
                 new Bicycle(),
                 new Horse(10)
         };
-        for (ITransport transport : transports) {
+        for (Transport transport : transports) {
             transport.place(new Human(names[(int)(Math.random() * names.length)], 10));
         }
-        for (ITransport transport : transports) {
+        for (Transport transport : transports) {
             final var loggedMovable = new LoggedMovable(transport);
             for (Landscape landscape : Landscape.values()) {
                 loggedMovable.move(1, landscape);

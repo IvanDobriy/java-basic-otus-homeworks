@@ -2,7 +2,7 @@ package ru.otus.java.basic.homeworks.lesson7.transport;
 
 import java.util.Objects;
 
-public abstract class GasolineTransport extends ATransport {
+public abstract class GasolineTransport extends AbstractTransport {
     private int gasoline = 0;
 
     protected GasolineTransport(int gasoline) {

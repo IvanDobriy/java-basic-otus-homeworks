@@ -4,7 +4,7 @@ import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
 
 import java.util.Objects;
 
-public class Bicycle extends ATransport {
+public class Bicycle extends AbstractTransport {
     @Override
     public boolean move(int distance, Landscape landscape) {
         if (Objects.isNull(this.getDriver())) {

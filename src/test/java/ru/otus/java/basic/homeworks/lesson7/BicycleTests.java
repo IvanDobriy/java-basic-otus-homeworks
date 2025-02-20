@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import ru.otus.java.basic.homeworks.lesson7.driver.Human;
-import ru.otus.java.basic.homeworks.lesson7.driver.IDriver;
+import ru.otus.java.basic.homeworks.lesson7.driver.Driver;
 import ru.otus.java.basic.homeworks.lesson7.landscape.Landscape;
 import ru.otus.java.basic.homeworks.lesson7.transport.Bicycle;
 
@@ -56,7 +56,7 @@ public class BicycleTests {
 
     @Test
     void repeatPlaceWithSameDriver() {
-        final IDriver driver = new Human("Ivan", 10);
+        final Driver driver = new Human("Ivan", 10);
         final var bicycle = new Bicycle();
         bicycle.place(driver);
         final var result = bicycle.place(driver);
@@ -67,8 +67,8 @@ public class BicycleTests {
 
     @Test
     void repeatWithOccupiedDriver() {
-        final IDriver driver1 = new Human("Ivan", 10);
-        final IDriver driver2 = new Human("John", 10);
+        final Driver driver1 = new Human("Ivan", 10);
+        final Driver driver2 = new Human("John", 10);
         final var bicycle = new Bicycle();
         bicycle.place(driver1);
         final var result = bicycle.place(driver2);

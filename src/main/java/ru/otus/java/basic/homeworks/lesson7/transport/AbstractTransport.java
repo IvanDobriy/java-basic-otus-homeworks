@@ -1,14 +1,14 @@
 package ru.otus.java.basic.homeworks.lesson7.transport;
 
-import ru.otus.java.basic.homeworks.lesson7.driver.IDriver;
+import ru.otus.java.basic.homeworks.lesson7.driver.Driver;
 
 import java.util.Objects;
 
-public abstract class ATransport implements ITransport {
-    private IDriver currentDriver;
+public abstract class AbstractTransport implements Transport {
+    private Driver currentDriver;
 
     @Override
-    public boolean place(IDriver driver) {
+    public boolean place(Driver driver) {
         Objects.requireNonNull(driver);
         if (!Objects.isNull(currentDriver) && currentDriver != driver) {
             return false;
@@ -24,7 +24,7 @@ public abstract class ATransport implements ITransport {
     }
 
     @Override
-    public IDriver remove() {
+    public Driver remove() {
         if(Objects.isNull(currentDriver)){
             return null;
         }
@@ -37,7 +37,7 @@ public abstract class ATransport implements ITransport {
     }
 
     @Override
-    public IDriver getDriver() {
+    public Driver getDriver() {
         return currentDriver;
     }
 

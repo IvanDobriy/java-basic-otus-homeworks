@@ -116,15 +116,13 @@ public class BicycleTests {
 
         bicycle.place(human);
 
-        Assertions.assertEquals(9, bicycle.spendEnergy(1));
+        Assertions.assertTrue( bicycle.spendEnergy(1));
         Assertions.assertEquals(9, bicycle.getEnergy());
         Assertions.assertEquals(9, human.getEnergy());
 
-        Assertions.assertEquals(-1, bicycle.spendEnergy(10));
+        Assertions.assertFalse( bicycle.spendEnergy(10));
         Assertions.assertEquals(0, bicycle.getEnergy());
         Assertions.assertEquals(0, human.getEnergy());
     }
-
-
 
 }

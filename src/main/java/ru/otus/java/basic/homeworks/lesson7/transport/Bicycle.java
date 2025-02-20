@@ -13,14 +13,14 @@ public class Bicycle extends AbstractTransport {
         if (landscape == Landscape.SWAMP) {
             return false;
         }
-        return spendEnergy(distance) >= 0;
+        return spendEnergy(distance);
     }
 
     @Override
-    public int spendEnergy(int amount) {
+    public boolean spendEnergy(int amount) {
         final var driver = getDriver();
         if (driver == null) {
-            return -1;
+            return false;
         }
         return getDriver().spendEnergy(amount);
     }

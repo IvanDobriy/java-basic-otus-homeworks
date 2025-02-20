@@ -15,7 +15,6 @@ public class Rover extends GasolineTransport {
         if (this.getDriver() == null) {
             return false;
         }
-        int remains = spendEnergy(distance);
-        return remains >= 0;
+        return spendEnergy(distance);
     }
 }

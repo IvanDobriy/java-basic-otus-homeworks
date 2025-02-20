@@ -64,11 +64,11 @@ public class CarTests {
 
         car.place(human);
 
-        Assertions.assertEquals(9, car.spendEnergy(1));
+        Assertions.assertTrue(car.spendEnergy(1));
         Assertions.assertEquals(9, car.getEnergy());
         Assertions.assertEquals(10, human.getEnergy());
 
-        Assertions.assertEquals(-1, car.spendEnergy(10));
+        Assertions.assertFalse(car.spendEnergy(10));
         Assertions.assertEquals(0, car.getEnergy());
         Assertions.assertEquals(10, human.getEnergy());
     }

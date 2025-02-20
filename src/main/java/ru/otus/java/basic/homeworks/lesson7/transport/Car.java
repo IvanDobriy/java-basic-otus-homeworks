@@ -15,10 +15,9 @@ public class Car extends GasolineTransport {
         if (this.getDriver() == null) {
             return false;
         }
-        int remains = -1;
-        if(landscape.equals(Landscape.PLAIN)){
-            remains = spendEnergy(distance);
+        if (landscape != Landscape.PLAIN) {
+            return false;
         }
-        return remains >= 0;
+        return spendEnergy(distance);
     }
 }

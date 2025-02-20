@@ -10,13 +10,13 @@ public abstract class GasolineTransport extends AbstractTransport {
     }
 
     @Override
-    public int spendEnergy(int amount) {
+    public boolean spendEnergy(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount < 0");
         }
         int remains = gasoline - amount;
         gasoline = Math.max(0, remains);
-        return remains;
+        return remains >= 0;
     }
 
     @Override

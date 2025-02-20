@@ -29,7 +29,7 @@ public class Human implements Driver {
     @Override
     public boolean move(int distance, Landscape landscape) {
         if (currentTransport == null) {
-            return spendEnergy(distance) >= 0;
+            return spendEnergy(distance);
         }
         return currentTransport.move(distance, landscape);
     }
@@ -67,13 +67,13 @@ public class Human implements Driver {
     }
 
     @Override
-    public int spendEnergy(int amount) {
+    public boolean spendEnergy(int amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("amount < 0");
         }
         int remains = energy - amount;
         energy = Math.max(0, remains);
-        return remains;
+        return remains >= 0;
     }
 
     @Override

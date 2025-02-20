@@ -63,11 +63,11 @@ public class HorseTests {
 
         horse.place(human);
 
-        Assertions.assertEquals(9, horse.spendEnergy(1));
+        Assertions.assertTrue(horse.spendEnergy(1));
         Assertions.assertEquals(9, horse.getEnergy());
         Assertions.assertEquals(10, human.getEnergy());
 
-        Assertions.assertEquals(-1, horse.spendEnergy(10));
+        Assertions.assertFalse(horse.spendEnergy(10));
         Assertions.assertEquals(0, horse.getEnergy());
         Assertions.assertEquals(10, human.getEnergy());
     }

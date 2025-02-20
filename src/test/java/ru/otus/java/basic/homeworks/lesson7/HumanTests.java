@@ -116,9 +116,9 @@ public class HumanTests {
     @Test
     void spendEnergyTest() {
         final var human = new Human("Ivan", 10);
-        Assertions.assertEquals(9, human.spendEnergy(1));
+        Assertions.assertTrue( human.spendEnergy(1));
         Assertions.assertEquals(9, human.getEnergy());
-        Assertions.assertEquals(-1, human.spendEnergy(10));
+        Assertions.assertFalse(human.spendEnergy(10));
         Assertions.assertEquals(0, human.getEnergy());
     }
 }

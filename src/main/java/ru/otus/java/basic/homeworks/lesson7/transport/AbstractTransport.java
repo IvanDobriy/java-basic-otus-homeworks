@@ -30,7 +30,7 @@ public abstract class AbstractTransport implements Transport {
         }
         final var driver = currentDriver;
         currentDriver = null;
-        if (!Objects.isNull(driver.getTransport())) {
+        if (driver.getTransport() != null) {
             driver.getOut();
         }
         return driver;

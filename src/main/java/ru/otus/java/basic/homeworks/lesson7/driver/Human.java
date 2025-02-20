@@ -55,7 +55,7 @@ public class Human implements Driver {
         }
         final var transport = currentTransport;
         currentTransport = null;
-        if (!Objects.isNull(transport.getDriver())) {
+        if (transport.getDriver() != null) {
             transport.remove();
         }
         return transport;

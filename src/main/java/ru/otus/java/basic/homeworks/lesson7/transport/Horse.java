@@ -28,7 +28,7 @@ public class Horse extends AbstractTransport {
 
     @Override
     public boolean move(int distance, Landscape landscape) {
-        if (Objects.isNull(this.getDriver())) {
+        if (this.getDriver() == null) {
             return false;
         }
         if (landscape.equals(Landscape.SWAMP)) {
@@ -36,11 +36,12 @@ public class Horse extends AbstractTransport {
         }
         return spendEnergy(distance) >= 0;
     }
+
     @Override
     public String toString() {
         String name = null;
         var driver = getDriver();
-        if (!Objects.isNull(driver)) {
+        if (driver != null) {
             name = driver.getName();
         }
         return String.format("%s{forces:%d,currentDriver:%s}", this.getClass().getName(), forces, name);

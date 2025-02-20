@@ -28,7 +28,7 @@ public class Human implements Driver {
 
     @Override
     public boolean move(int distance, Landscape landscape) {
-        if (Objects.isNull(currentTransport)) {
+        if (currentTransport == null) {
             return spendEnergy(distance) >= 0;
         }
         return currentTransport.move(distance, landscape);
@@ -37,7 +37,7 @@ public class Human implements Driver {
     @Override
     public boolean getIn(Transport transport) {
         Objects.requireNonNull(transport);
-        if (!Objects.isNull(currentTransport) && currentTransport != transport) {
+        if (currentTransport != null && currentTransport != transport) {
             return false;
         }
         currentTransport = transport;
@@ -50,7 +50,7 @@ public class Human implements Driver {
 
     @Override
     public Transport getOut() {
-        if(Objects.isNull(currentTransport)){
+        if (currentTransport == null) {
             return null;
         }
         final var transport = currentTransport;

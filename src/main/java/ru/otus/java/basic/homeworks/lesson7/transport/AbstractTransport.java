@@ -10,11 +10,11 @@ public abstract class AbstractTransport implements Transport {
     @Override
     public boolean place(Driver driver) {
         Objects.requireNonNull(driver);
-        if (!Objects.isNull(currentDriver) && currentDriver != driver) {
+        if (currentDriver != null && currentDriver != driver) {
             return false;
         }
         final var transport = driver.getTransport();
-        if (Objects.isNull(transport)) {
+        if (transport == null) {
             driver.getIn(this);
         } else if (transport != this) {
             return false;
@@ -25,7 +25,7 @@ public abstract class AbstractTransport implements Transport {
 
     @Override
     public Driver remove() {
-        if(Objects.isNull(currentDriver)){
+        if (currentDriver == null) {
             return null;
         }
         final var driver = currentDriver;
@@ -44,7 +44,7 @@ public abstract class AbstractTransport implements Transport {
     @Override
     public String toString() {
         String name = null;
-        if (!Objects.isNull(currentDriver)) {
+        if (currentDriver != null) {
             name = currentDriver.getName();
         }
         return String.format("%s{currentDriver:%s}", this.getClass().getName(), name);

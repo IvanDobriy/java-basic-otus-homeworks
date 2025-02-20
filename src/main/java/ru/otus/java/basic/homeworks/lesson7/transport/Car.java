@@ -12,7 +12,7 @@ public class Car extends GasolineTransport {
 
     @Override
     public boolean move(int distance, Landscape landscape) {
-        if (Objects.isNull(this.getDriver())) {
+        if (this.getDriver() == null) {
             return false;
         }
         int remains = -1;

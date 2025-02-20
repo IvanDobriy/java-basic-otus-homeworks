@@ -27,7 +27,7 @@ public abstract class GasolineTransport extends AbstractTransport {
     @Override
     public String toString() {
         String name = null;
-        if (!Objects.isNull(getDriver())) {
+        if (getDriver() != null) {
             name = getDriver().getName();
         }
         return String.format("%s{gasoline:%d,currentDriver:%s}", this.getClass().getName(), gasoline, name);

@@ -13,8 +13,8 @@ public class App {
                 new Cat("Murzic", 3),
                 new Cat("Barsic", 10), // I fill sorry for Barsic ((
         };
-        for (final var cat : cats) {
-            for (final var plate : plates) {
+        for (Cat cat : cats) {
+            for (Plate plate : plates) {
                 if (cat.isFull()) {
                     break;
                 }

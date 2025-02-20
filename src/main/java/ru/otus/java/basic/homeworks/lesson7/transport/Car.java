@@ -12,7 +12,7 @@ public class Car extends GasolineTransport {
 
     @Override
     public boolean move(int distance, Landscape landscape) {
-        if (this.getDriver() == null) {
+        if (currentDriver == null) {
             return false;
         }
         if (landscape != Landscape.PLAIN) {

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Bicycle extends AbstractTransport {
     @Override
     public boolean move(int distance, Landscape landscape) {
-        if (this.getDriver() == null) {
+        if (currentDriver == null) {
             return false;
         }
         if (landscape == Landscape.SWAMP) {
@@ -18,8 +18,7 @@ public class Bicycle extends AbstractTransport {
 
     @Override
     public boolean spendEnergy(int amount) {
-        final var driver = getDriver();
-        if (driver == null) {
+        if (currentDriver == null) {
             return false;
         }
         return getDriver().spendEnergy(amount);
@@ -27,10 +26,9 @@ public class Bicycle extends AbstractTransport {
 
     @Override
     public int getEnergy() {
-        final var driver = getDriver();
-        if (driver == null) {
+        if (currentDriver == null) {
             return 0;
         }
-        return driver.getEnergy();
+        return currentDriver.getEnergy();
     }
 }

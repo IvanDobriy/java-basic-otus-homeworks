@@ -12,7 +12,7 @@ public class Rover extends GasolineTransport {
 
     @Override
     public boolean move(int distance, Landscape landscape) {
-        if (this.getDriver() == null) {
+        if (currentDriver == null) {
             return false;
         }
         return spendEnergy(distance);

@@ -5,7 +5,7 @@ import ru.otus.java.basic.homeworks.lesson7.driver.Driver;
 import java.util.Objects;
 
 public abstract class AbstractTransport implements Transport {
-    private Driver currentDriver;
+    protected Driver currentDriver;
 
     @Override
     public boolean place(Driver driver) {

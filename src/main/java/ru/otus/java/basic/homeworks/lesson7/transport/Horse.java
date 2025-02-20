@@ -31,7 +31,7 @@ public class Horse extends AbstractTransport {
         if (this.getDriver() == null) {
             return false;
         }
-        if (landscape.equals(Landscape.SWAMP)) {
+        if (landscape == Landscape.SWAMP) {
             return false;
         }
         return spendEnergy(distance);

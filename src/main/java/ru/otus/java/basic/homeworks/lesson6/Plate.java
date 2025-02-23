@@ -32,13 +32,12 @@ public class Plate {
         if (amount < 0) {
             throw new IllegalArgumentException("amount < 0");
         }
-        boolean result = false;
         final var newAmount = currentAmount - amount;
-        if (newAmount >= 0) {
-            result = true;
+        if (newAmount < 0) {
+            return false;
         }
-        currentAmount = Math.max(0, newAmount);
-        return result;
+        currentAmount = newAmount;
+        return true;
     }
 
     @Override

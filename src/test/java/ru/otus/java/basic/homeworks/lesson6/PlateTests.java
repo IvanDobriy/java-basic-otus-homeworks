@@ -25,13 +25,13 @@ public class PlateTests {
     void removeMealTest() {
         final var plate = new Plate(10);
         var result = plate.removeMeal(1);
-        Assertions.assertTrue( result);
+        Assertions.assertTrue(result);
         Assertions.assertEquals(10, plate.getCapacity());
         Assertions.assertEquals(9, plate.getCurrentAmount());
         result = plate.removeMeal(10);
-        Assertions.assertFalse( result);
+        Assertions.assertFalse(result);
         Assertions.assertEquals(10, plate.getCapacity());
-        Assertions.assertEquals(0, plate.getCurrentAmount());
+        Assertions.assertEquals(9, plate.getCurrentAmount());
     }
 
     @Test
@@ -59,13 +59,13 @@ public class PlateTests {
     void addMealNegativeTest() {
         final var plate = new Plate(10);
         final var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-           plate.addMeal(-1);
+            plate.addMeal(-1);
         });
         Assertions.assertEquals("amount < 0", exception.getMessage());
     }
 
     @Test
-    void toStringTest(){
+    void toStringTest() {
         final var plate = new Plate(10);
         final var expected = "Plate{capacity:10,currentAmount:10}";
         Assertions.assertEquals(expected, plate.toString());

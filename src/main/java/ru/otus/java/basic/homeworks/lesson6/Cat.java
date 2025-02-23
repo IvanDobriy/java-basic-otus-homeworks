@@ -27,11 +27,7 @@ public class Cat {
     }
 
     public void eat(Plate plate) {
-        if (plate.getCurrentAmount() < appetite) {
-            return;
-        }
-        plate.removeMeal(appetite);
-        isFull = true;
+        isFull = plate.removeMeal(appetite);
     }
 
     @Override

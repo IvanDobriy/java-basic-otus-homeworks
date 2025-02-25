@@ -7,7 +7,7 @@ public class AppArrayDataException extends Exception {
     private final String[][] arr;
 
     public AppArrayDataException(String[][] arr, String value, int row, int col, Throwable cause) {
-        super(String.format("Can`t parse el:%s to int for [%d, %d] element", value, row, col), cause);
+        super(String.format("Can`t parse el:'%s' to int for [%d, %d] element", value, row, col), cause);
         this.arr = arr;
         this.value = value;
         this.row = row;
@@ -26,4 +26,7 @@ public class AppArrayDataException extends Exception {
         return col;
     }
 
+    public String[][] getArr() {
+        return arr;
+    }
 }

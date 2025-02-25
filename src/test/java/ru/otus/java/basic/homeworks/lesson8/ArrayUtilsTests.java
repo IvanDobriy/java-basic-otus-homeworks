@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ArrayUtilsTests {
+class ArrayUtilsTests {
     @Test
     void positiveTest() throws AppArrayDataException {
         final String[][] data = {

@@ -12,11 +12,11 @@ public class ArrayUtils {
                 throw new AppArraySizeException(arr);
             }
             for (int col = 0; col < subArr.length; col++) {
-                String el = subArr[col].trim();
+                String element = subArr[col].trim();
                 try {
-                    result += Integer.parseInt(el);
+                    result += Integer.parseInt(element);
                 } catch (NumberFormatException e) {
-                    throw new AppArrayDataException(arr, el, row, col, e);
+                    throw new AppArrayDataException(arr, element, row, col, e);
                 }
             }
         }

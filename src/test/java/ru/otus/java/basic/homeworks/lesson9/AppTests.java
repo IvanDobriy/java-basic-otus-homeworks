@@ -26,4 +26,27 @@ class AppTests {
         Assertions.assertEquals(-1, exception.getMax());
     }
 
+    @Test
+    void sumTest() {
+        var result = App.sum(List.of(1, 5, 7, 10));
+        Assertions.assertEquals(17, result);
+        result = App.sum(List.of());
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
+    void fillTest() {
+        final var data = Arrays.asList(1, 2, 3);
+        App.fill(10, data);
+        Assertions.assertEquals(List.of(10, 10, 10), data);
+    }
+
+    @Test
+    void incrementTest() {
+        final var data = Arrays.asList(1, 2, 3);
+        App.increment(10, data);
+        Assertions.assertEquals(List.of(11, 12, 13), data);
+    }
+
+
 }

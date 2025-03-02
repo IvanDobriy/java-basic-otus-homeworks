@@ -2,6 +2,7 @@ package ru.otus.java.basic.homeworks.lesson9;
 
 import ru.otus.java.basic.homeworks.lesson9.exceptions.RangeCreationException;
 
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,5 +41,13 @@ public class App {
             final var previous = elements.get(i);
             elements.set(i, previous + value);
         }
+    }
+
+    public static List<String> getNames(List<Employee> employees) {
+        final var names = new ArrayList<String>(employees.size());
+        for (Employee employee : employees) {
+            names.add(employee.getName());
+        }
+        return names;
     }
 }

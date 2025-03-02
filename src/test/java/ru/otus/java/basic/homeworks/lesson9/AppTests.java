@@ -48,5 +48,11 @@ class AppTests {
         Assertions.assertEquals(List.of(11, 12, 13), data);
     }
 
+    @Test
+    void getNamesTest() {
+        final var result = App.getNames(List.of(new Employee("Ivan", 34), new Employee("John", 12)));
+        Assertions.assertEquals(List.of("Ivan", "John"), result);
+    }
+
 
 }

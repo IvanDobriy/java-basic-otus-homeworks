@@ -3,8 +3,6 @@ package ru.otus.java.basic.homeworks.lesson9;
 import ru.otus.java.basic.homeworks.lesson9.exceptions.RangeCreationException;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class App {
@@ -74,7 +72,7 @@ public class App {
         var youngest = employees.get(0);
         for (Employee employee : employees) {
 
-            if(youngest.getAge() > employee.getAge()){
+            if (youngest.getAge() > employee.getAge()) {
                 youngest = employee;
             }
         }

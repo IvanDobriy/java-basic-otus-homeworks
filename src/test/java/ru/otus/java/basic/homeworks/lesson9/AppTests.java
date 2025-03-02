@@ -54,5 +54,33 @@ class AppTests {
         Assertions.assertEquals(List.of("Ivan", "John"), result);
     }
 
+    @Test
+    void teamIsOldTest() {
+        var result = App.teamIsOld(10, List.of(new Employee("Ivan", 6), new Employee("John", 6)));
+        Assertions.assertFalse(result);
+        result = App.teamIsOld(10, List.of(new Employee("Ivan", 16), new Employee("John", 16)));
+        Assertions.assertTrue(result);
+        var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            App.teamIsOld(10, List.of());
+        });
+        Assertions.assertEquals("Team list is empty", exception.getMessage());
+
+        exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            App.teamIsOld(-10, List.of(new Employee("Ivan", 10)));
+        });
+        Assertions.assertEquals("middle age < 0", exception.getMessage());
+    }
+
+    @Test
+    void getYoungestTest() {
+        final var employees = List.of(new Employee("Ivan", 16), new Employee("John", 6));
+        final var result = App.getYoungest(employees);
+        Assertions.assertEquals(employees.get(1), result);
+        final var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            App.getYoungest(List.of());
+        });
+        Assertions.assertEquals("Employee list is empty", exception.getMessage());
+    }
+
 
 }

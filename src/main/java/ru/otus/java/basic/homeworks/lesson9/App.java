@@ -2,8 +2,9 @@ package ru.otus.java.basic.homeworks.lesson9;
 
 import ru.otus.java.basic.homeworks.lesson9.exceptions.RangeCreationException;
 
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class App {
@@ -49,5 +50,34 @@ public class App {
             names.add(employee.getName());
         }
         return names;
+    }
+
+    public static boolean teamIsOld(int middleAge, List<Employee> team) {
+        if (team.isEmpty()) {
+            throw new IllegalArgumentException("Team list is empty");
+        }
+        if (middleAge < 0) {
+            throw new IllegalArgumentException("middle age < 0");
+        }
+        int agesSum = 0;
+        for (Employee employee : team) {
+            agesSum += employee.getAge();
+        }
+        int average = agesSum / team.size();
+        return average >= middleAge;
+    }
+
+    public static Employee getYoungest(final List<Employee> employees) {
+        if (employees.isEmpty()) {
+            throw new IllegalArgumentException("Employee list is empty");
+        }
+        var youngest = employees.get(0);
+        for (Employee employee : employees) {
+
+            if(youngest.getAge() > employee.getAge()){
+                youngest = employee;
+            }
+        }
+        return youngest;
     }
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class EmployeeTests {
+class EmployeeTests {
     @Test
     void creationTest() {
         final var employee = new Employee("Ivan", 34);

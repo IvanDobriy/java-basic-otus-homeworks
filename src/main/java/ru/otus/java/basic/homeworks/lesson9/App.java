@@ -50,7 +50,7 @@ public class App {
         return names;
     }
 
-    public static boolean teamIsOld(int middleAge, List<Employee> team) {
+    public static boolean isAverageAgeAbove(int middleAge, List<Employee> team) {
         if (team.isEmpty()) {
             throw new IllegalArgumentException("Team list is empty");
         }
@@ -61,8 +61,8 @@ public class App {
         for (Employee employee : team) {
             agesSum += employee.getAge();
         }
-        int average = agesSum / team.size();
-        return average >= middleAge;
+        double average = (double)agesSum / team.size();
+        return average > middleAge;
     }
 
     public static Employee getYoungest(final List<Employee> employees) {

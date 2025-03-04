@@ -55,18 +55,18 @@ class AppTests {
     }
 
     @Test
-    void teamIsOldTest() {
-        var result = App.teamIsOld(10, List.of(new Employee("Ivan", 6), new Employee("John", 6)));
+    void isAverageAboveTest() {
+        var result = App.isAverageAgeAbove(10, List.of(new Employee("Ivan", 6), new Employee("John", 6)));
         Assertions.assertFalse(result);
-        result = App.teamIsOld(10, List.of(new Employee("Ivan", 16), new Employee("John", 16)));
+        result = App.isAverageAgeAbove(10, List.of(new Employee("Ivan", 16), new Employee("John", 16)));
         Assertions.assertTrue(result);
         var exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            App.teamIsOld(10, List.of());
+            App.isAverageAgeAbove(10, List.of());
         });
         Assertions.assertEquals("Team list is empty", exception.getMessage());
 
         exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            App.teamIsOld(-10, List.of(new Employee("Ivan", 10)));
+            App.isAverageAgeAbove(-10, List.of(new Employee("Ivan", 10)));
         });
         Assertions.assertEquals("middle age < 0", exception.getMessage());
     }

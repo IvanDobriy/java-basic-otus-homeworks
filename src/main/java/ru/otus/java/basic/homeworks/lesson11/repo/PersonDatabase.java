@@ -24,6 +24,7 @@ public class PersonDatabase {
     }
 
     public PersonDatabase(Map<Long, Person> storage) {
+        Objects.requireNonNull(storage);
         this.storage = storage;
     }
 

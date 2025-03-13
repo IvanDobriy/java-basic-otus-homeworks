@@ -20,31 +20,60 @@ public class PhoneBook {
         phoneSet.add(phone);
     }
 
+    private String lfpKey(String lastName, String firstName, String patronymic) {
+        return String.format("l:%s f:%s p:%s ", lastName, firstName, patronymic);
+    }
+
+    private String lfKey(String lastName, String firstName) {
+        return String.format("l:%s f:%s ", lastName, firstName);
+    }
+
+    private String lpKey(String lastName, String patronymic) {
+        return String.format("l:%s p:%s ", lastName, patronymic);
+    }
+
+    private String fpKey(String firstName, String patronymic) {
+        return String.format("f:%s p:%s ", firstName, patronymic);
+    }
+
+    private String lKey(String lastName) {
+        return String.format("l:%s ", lastName);
+    }
+
+    private String pKey(String patronymic) {
+        return String.format("p:%s ", patronymic);
+    }
+
+    private String fKey(String firstName) {
+        return String.format("f:%s ", firstName);
+    }
+
+
     public void add(String lastName, String firstName, String patronymic, String phone) {
         Objects.requireNonNull(lastName, "last name is null");
         Objects.requireNonNull(firstName, "first name is null");
         Objects.requireNonNull(patronymic, "patronymic is null");
         Objects.requireNonNull(phone, "phone is null");
         phones.add(phone);
-        addToStorage(String.format("l:%s f:%s p:%s ", lastName, firstName, patronymic), phone);
-        addToStorage(String.format("l:%s f:%s ", lastName, firstName), phone);
-        addToStorage(String.format("l:%s p:%s ", lastName, patronymic), phone);
-        addToStorage(String.format("f:%s p:%s ", firstName, patronymic), phone);
-        addToStorage(String.format("l:%s ", lastName), phone);
-        addToStorage(String.format("f:%s ", firstName), phone);
-        addToStorage(String.format("p:%s ", patronymic), phone);
+        addToStorage(lfpKey(lastName, firstName, patronymic), phone);
+        addToStorage(lfKey(lastName, firstName), phone);
+        addToStorage(lpKey(lastName, patronymic), phone);
+        addToStorage(fpKey(firstName, patronymic), phone);
+        addToStorage(lKey(lastName), phone);
+        addToStorage(fKey(firstName), phone);
+        addToStorage(pKey(patronymic), phone);
     }
 
     public List<String> find(String lastName, String firstName, String patronymic) {
         final var searchKey = new StringBuilder();
         if (lastName != null) {
-            searchKey.append(String.format("l:%s ", lastName));
+            searchKey.append(lKey(lastName));
         }
         if (firstName != null) {
-            searchKey.append(String.format("f:%s ", firstName));
+            searchKey.append(fKey(firstName));
         }
         if (patronymic != null) {
-            searchKey.append(String.format("p:%s ", patronymic));
+            searchKey.append(pKey(patronymic));
         }
         final var phones = storage.get(searchKey.toString());
         if (phones != null) {

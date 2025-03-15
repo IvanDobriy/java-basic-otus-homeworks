@@ -14,4 +14,12 @@ class SortingTest {
         Sorting.bubbleSort(arr);
         Assertions.assertArrayEquals(expected, arr);
     }
+
+    @Test
+    void quickSortTest(){
+        final var arr = new int[]{3,2,1};
+        final var expected = new int[]{1,2,3};
+        Sorting.quickSort(arr);
+        Assertions.assertArrayEquals(expected, arr);
+    }
 }

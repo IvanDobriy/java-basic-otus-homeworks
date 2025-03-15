@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class FileHandler {
     private Path rootPath;
+    private Scanner scanner;
 
     public FileHandler(String uri) {
         Objects.requireNonNull(uri);
@@ -18,6 +19,7 @@ public class FileHandler {
             throw new RuntimeException(String.format("file with uri: %s must be a directory", uri));
         }
         rootPath = path;
+        scanner = new Scanner(System.in);
     }
 
     public List<File> getTextFiles() {
@@ -35,7 +37,20 @@ public class FileHandler {
         return result;
     }
 
+    public boolean needContinue(){
+        System.out.println("Enter 'y' to continue:");
+        final var line = scanner.next();
+        if(line.equals("y")){
+            return true;
+        }
+        return false;
+    }
+
     public void printFileList(List<File> files) {
+        if(files.isEmpty()){
+            System.out.println("Text files not found");
+            return;
+        }
         System.out.println(String.format("%s", "Files:"));
         for (File file : files) {
             System.out.println(String.format("%s", file.getName()));
@@ -43,7 +58,6 @@ public class FileHandler {
     }
 
     public File selectFile(List<File> files) {
-        final var scanner = new Scanner(System.in);
         File selectedFile = null;
         do {
             System.out.println(String.format("%s", "Chose file to work:"));
@@ -59,6 +73,7 @@ public class FileHandler {
     }
 
     public void printFileContent(File file) throws IOException {
+        System.out.println("File content:");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             String line = null;
             while ((line = reader.readLine()) != null) {

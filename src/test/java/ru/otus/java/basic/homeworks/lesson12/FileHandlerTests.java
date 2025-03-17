@@ -66,7 +66,7 @@ class FileHandlerTests {
     }
 
     @Test
-    void selectFileTest(@TempDir Path dir){
+    void selectFileTest(@TempDir Path dir) {
         final var expectedFile = new File("f1");
         final var newIn = new ByteArrayInputStream(expectedFile.getName().getBytes(Charset.defaultCharset()));
         System.setIn(newIn);
@@ -110,7 +110,7 @@ class FileHandlerTests {
     }
 
     @Test
-    void needContinueNegativeTest(@TempDir Path dir){
+    void needContinueNegativeTest(@TempDir Path dir) {
         var newIn = new ByteArrayInputStream("n".getBytes(Charset.defaultCharset()));
         System.setIn(newIn);
         final var handler = new FileHandler(dir.toString());

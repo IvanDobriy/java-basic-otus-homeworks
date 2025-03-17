@@ -83,7 +83,6 @@ public class FileHandler {
     }
 
     public void enterText(File file) throws IOException {
-//        final var scanner = new Scanner(System.in);
         System.out.println("Enter some test: ");
         final var text = scanner.nextLine();
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)))) {

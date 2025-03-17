@@ -37,17 +37,17 @@ public class FileHandler {
         return result;
     }
 
-    public boolean needContinue(){
+    public boolean needContinue() {
         System.out.println("Enter 'y' to continue:");
-        final var line = scanner.next();
-        if(line.equals("y")){
+        final var line = scanner.nextLine();
+        if (line.equals("y")) {
             return true;
         }
         return false;
     }
 
     public void printFileList(List<File> files) {
-        if(files.isEmpty()){
+        if (files.isEmpty()) {
             System.out.println("Text files not found");
             return;
         }
@@ -61,7 +61,7 @@ public class FileHandler {
         File selectedFile = null;
         do {
             System.out.println(String.format("%s", "Chose file to work:"));
-            final var fileName = scanner.next().trim().toLowerCase();
+            final var fileName = scanner.nextLine().trim().toLowerCase();
             for (File file : files) {
                 if (file.getName().trim().toLowerCase().contains(fileName)) {
                     selectedFile = file;
@@ -83,9 +83,9 @@ public class FileHandler {
     }
 
     public void enterText(File file) throws IOException {
-        final var scanner = new Scanner(System.in);
+//        final var scanner = new Scanner(System.in);
         System.out.println("Enter some test: ");
-        final var text = scanner.next();
+        final var text = scanner.nextLine();
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)))) {
             writer.write(text);
         }

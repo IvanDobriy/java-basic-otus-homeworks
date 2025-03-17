@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AppTest {
@@ -39,7 +40,8 @@ public class AppTest {
                 tempFilePath.toFile().getName() + "\n" +
                 "Chose file to work:\n" +
                 "File content:\n" +
-                "Enter some test: \n", outputStream.toString());
+                "Enter some test: \n" +
+                "Enter 'y' to continue:\n", outputStream.toString());
         Assertions.assertEquals("hi", Files.readString(tempFilePath));
     }
 }

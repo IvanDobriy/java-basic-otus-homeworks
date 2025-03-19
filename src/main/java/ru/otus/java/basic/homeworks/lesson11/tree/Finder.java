@@ -6,13 +6,14 @@ import java.util.Objects;
 
 
 public class Finder<T> implements SearchTree<T> {
-    public static class Node<T> {
+    public class Node<T> {
         private T key;
         private Node<T> left;
         private Node<T> right;
 
         public Node(T key) {
             Objects.requireNonNull(key);
+            this.key = key;
             left = right = null;
         }
 
@@ -48,16 +49,38 @@ public class Finder<T> implements SearchTree<T> {
 
     private final Comparator<T> comparator;
 
+    int pathLength;
+
     public Finder(List<T> elements, Comparator<T> comparator) {
         Objects.requireNonNull(elements);
         Objects.requireNonNull(comparator);
+        if (!isSorted(elements, comparator)) {
+            throw new IllegalArgumentException("Expected sorted list of elements");
+        }
         this.elements = elements;
         this.comparator = comparator;
         if (elements.isEmpty()) {
             root = null;
             return;
         }
+        pathLength = 0;
         root = sortedListToBst(elements, 0, elements.size() - 1);
+    }
+
+    public boolean isSorted(List<T> elements, Comparator<T> comparator) {
+        T previous = null;
+        for (T element : elements) {
+            if (element == null) {
+                throw new RuntimeException("element into sorted list must not be null");
+            }
+            if (previous == null) {
+                previous = element;
+            }
+            if (comparator.compare(previous, element) > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -76,6 +99,7 @@ public class Finder<T> implements SearchTree<T> {
     }
 
     public Node<T> find(Node<T> root, T element) {
+        pathLength++;
         if (root == null || root.getKey().equals(element)) {
             return root;
         }
@@ -85,13 +109,21 @@ public class Finder<T> implements SearchTree<T> {
         return find(root.getLeft(), element);
     }
 
+    public int getPathLength() {
+        return pathLength;
+    }
 
     @Override
     public T find(T element) {
         if (root == null) {
             return null;
         }
-        return find(root, element).getKey();
+        pathLength = 0;
+        final var result = find(root, element);
+        if (result == null) {
+            return null;
+        }
+        return result.getKey();
     }
 
     @Override

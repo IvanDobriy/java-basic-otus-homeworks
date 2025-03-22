@@ -57,6 +57,9 @@ public class Algebra {
         if (currentSymbol == '/') {
             return new DivisionOperation();
         }
+        if (currentSymbol == '*') {
+            return new MultiplicationOperation();
+        }
         throw new RuntimeException("unsupported binary operation");
     }
 
@@ -81,7 +84,7 @@ public class Algebra {
         return new RightBracket();
     }
 
-    public void build(Callback callback) {
+    public void forEach(Callback callback) {
         char currentSymbol;
         while (position < mathExpression.length()) {
             currentSymbol = mathExpression.charAt(position);

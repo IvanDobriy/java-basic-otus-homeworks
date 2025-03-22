@@ -14,7 +14,7 @@ public class MathParser {
         mathExpression = mathExpression.replaceAll("\\s+", "");
         final var rpn = new Rpn();
         final var algebra = new Algebra(mathExpression);
-        algebra.build(rpn::add);
+        algebra.forEach(rpn::add);
         return rpn;
     }
 }

@@ -1,45 +1,53 @@
 package ru.otus.java.basic.homeworks.lesson13.parser;
 
-import ru.otus.java.basic.homeworks.lesson13.parser.element.BinaryOperation;
-import ru.otus.java.basic.homeworks.lesson13.parser.element.Element;
+import ru.otus.java.basic.homeworks.lesson13.parser.element.*;
 import ru.otus.java.basic.homeworks.lesson13.parser.element.Number;
 
 import java.math.BigDecimal;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class Rpn {
-    final Queue<Number> values;
-    final Queue<BinaryOperation> operations;
+    final List<Element> postfix;
 
-    public Rpn(){
-        values = new LinkedList<>();
-        operations = new LinkedList<>();
+    public Rpn() {
+        postfix = new LinkedList<>();
     }
 
-    public void toPostfix(List<Element> element) {
-        if(element instanceof Number){
-            values.add((Number) element);
-            return;
+    public void toPostfix(List<Element> elements) {
+        final Deque<Element> stack = new LinkedList<>();
+        for (Element element : elements) {
+            if (element instanceof Number) {
+                postfix.add(element);
+                continue;
+            }
+            if (element instanceof LeftBracket) {
+                stack.add(element);
+                continue;
+            }
+            if (element instanceof RightBracket) {
+                while (stack.peek() instanceof LeftBracket) {
+                    postfix.add(stack.pop());
+                }
+                stack.pop();
+                continue;
+            }
+            while (!stack.isEmpty() && (element.getPrecedence() <= stack.peek().getPrecedence())) {
+                postfix.add(stack.pop());
+            }
+            postfix.add(element);
         }
-        if(element instanceof BinaryOperation){
-            operations.add((BinaryOperation) element);
+        while (!stack.isEmpty()) {
+            postfix.add(stack.pop());
         }
+    }
+
+    public List<Element> getPostfix() {
+        return postfix;
     }
 
     public BigDecimal calculate() {
-        BinaryOperation operation;
-        Number left;
-        Number right;
-        Number result;
-        while (!operations.isEmpty()){
-            operation = operations.remove();
-            left = values.remove();
-            right = values.remove();
-            result = operation.execute(left, right);
-            values.add(result);
-        }
-        return values.remove().getValue();
+        return null;
     }
 }

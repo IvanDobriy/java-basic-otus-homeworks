@@ -20,11 +20,11 @@ public class Rpn {
                 continue;
             }
             if (element instanceof LeftBracket) {
-                stack.add(element);
+                stack.push(element);
                 continue;
             }
             if (element instanceof RightBracket) {
-                while (stack.peek() instanceof LeftBracket) {
+                while (!(stack.peek() instanceof LeftBracket)) {
                     postfixNotation.add(stack.pop());
                 }
                 stack.pop();
@@ -33,7 +33,7 @@ public class Rpn {
             while (!stack.isEmpty() && (element.getPrecedence() <= stack.peek().getPrecedence())) {
                 postfixNotation.add(stack.pop());
             }
-            postfixNotation.add(element);
+            stack.push(element);
         }
         while (!stack.isEmpty()) {
             postfixNotation.add(stack.pop());

@@ -31,7 +31,7 @@ public class Algebra {
 
     public Number parseNumber() {
         StringBuilder builder = new StringBuilder();
-        while (Character.isDigit(mathExpression.charAt(position))) {
+        while (position < mathExpression.length() && Character.isDigit(mathExpression.charAt(position))) {
             builder.append(mathExpression.charAt(position));
             position++;
         }
@@ -40,7 +40,7 @@ public class Algebra {
 
     public BinaryOperation parseBinaryOperation() {
         char currentSymbol = mathExpression.charAt(position);
-        if (!(result.getLast() instanceof Number)) {
+        if (!((result.getLast() instanceof Number) || (result.getLast() instanceof RightBracket))) {
             throw new RuntimeException(String.format("%c is not binary operation", currentSymbol));
         }
         position++;

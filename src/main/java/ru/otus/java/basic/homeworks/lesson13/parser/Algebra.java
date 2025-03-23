@@ -5,18 +5,14 @@ import ru.otus.java.basic.homeworks.lesson13.parser.element.*;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class Algebra {
-
-    public interface Callback {
-        void run(Element element);
-    }
-
     private final Set<Character> brackets = Set.of('(', ')');
     private final Set<Character> mathOperations = Set.of('+', '-', '/', '*');
 
-    private final LinkedList<Element> rawElements;
+    private final LinkedList<Element> result;
 
     private final String mathExpression;
     private int position;
@@ -30,7 +26,7 @@ public class Algebra {
         this.mathExpression = mathExpression;
         position = 0;
         bracketCounter = 0;
-        rawElements = new LinkedList<>();
+        result = new LinkedList<>();
     }
 
     public Number parseNumber() {
@@ -44,7 +40,7 @@ public class Algebra {
 
     public BinaryOperation parseBinaryOperation() {
         char currentSymbol = mathExpression.charAt(position);
-        if (!(rawElements.getLast() instanceof Number)) {
+        if (!(result.getLast() instanceof Number)) {
             throw new RuntimeException(String.format("%c is not binary operation", currentSymbol));
         }
         position++;
@@ -66,7 +62,7 @@ public class Algebra {
     public Bracket parseBracket() {
         char currentSymbol = mathExpression.charAt(position);
         if (currentSymbol == '(') {
-            if (!(rawElements.isEmpty() || rawElements.getLast() instanceof BinaryOperation)) {
+            if (!(result.isEmpty() || result.getLast() instanceof BinaryOperation)) {
                 throw new RuntimeException("bla bla bla");
             }
             bracketCounter++;
@@ -76,7 +72,7 @@ public class Algebra {
         if (currentSymbol != ')') {
             throw new RuntimeException("bla bla bla");
         }
-        if (bracketCounter == 0 || !(rawElements.getLast() instanceof Number || rawElements.getLast() instanceof LeftBracket)) {
+        if (bracketCounter == 0 || !(result.getLast() instanceof Number || result.getLast() instanceof LeftBracket)) {
             throw new RuntimeException("bla bla bla");
         }
         bracketCounter--;
@@ -84,26 +80,24 @@ public class Algebra {
         return new RightBracket();
     }
 
-    public void forEach(Callback callback) {
+    public List<Element> parse() {
         char currentSymbol;
         while (position < mathExpression.length()) {
             currentSymbol = mathExpression.charAt(position);
             if (Character.isDigit(currentSymbol)) {
-                rawElements.add(parseNumber());
+                result.add(parseNumber());
                 continue;
             }
             if (brackets.contains(currentSymbol)) {
-                rawElements.add(parseBracket());
+                result.add(parseBracket());
             }
             if (mathOperations.contains(currentSymbol)) {
-                rawElements.add(parseBinaryOperation());
+                result.add(parseBinaryOperation());
             }
         }
         if (bracketCounter != 0) {
             throw new RuntimeException("bracketCounter != 0");
         }
-        for (Element element : rawElements) {
-            callback.run(element);
-        }
+        return result;
     }
 }

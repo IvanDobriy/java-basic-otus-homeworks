@@ -6,6 +6,7 @@ import ru.otus.java.basic.homeworks.lesson13.parser.element.Number;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Rpn {
@@ -17,7 +18,7 @@ public class Rpn {
         operations = new LinkedList<>();
     }
 
-    public void add(Element element) {
+    public void toPostfix(List<Element> element) {
         if(element instanceof Number){
             values.add((Number) element);
             return;

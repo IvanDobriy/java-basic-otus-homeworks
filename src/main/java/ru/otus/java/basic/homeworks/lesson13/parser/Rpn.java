@@ -11,11 +11,8 @@ import java.util.List;
 public class Rpn {
     final List<Element> postfix;
 
-    public Rpn() {
+    public Rpn(List<Element> elements) {
         postfix = new LinkedList<>();
-    }
-
-    public void toPostfix(List<Element> elements) {
         final Deque<Element> stack = new LinkedList<>();
         for (Element element : elements) {
             if (element instanceof Number) {
@@ -42,7 +39,6 @@ public class Rpn {
             postfix.add(stack.pop());
         }
     }
-
     public List<Element> getPostfix() {
         return postfix;
     }

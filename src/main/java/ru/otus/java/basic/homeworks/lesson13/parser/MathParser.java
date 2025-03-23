@@ -12,10 +12,9 @@ public class MathParser {
             throw new IllegalArgumentException("math expression is blank");
         }
         mathExpression = mathExpression.replaceAll("\\s+", "");
-        final var rpn = new Rpn();
         final var algebra = new Algebra(mathExpression);
         final var elements = algebra.parse();
-        rpn.toPostfix(elements);
+        final var rpn = new Rpn(elements);
         return rpn;
     }
 }

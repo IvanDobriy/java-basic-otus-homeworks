@@ -9,14 +9,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Rpn {
-    final List<Element> postfix;
+    final List<Element> postfixNotation;
 
-    public Rpn(List<Element> elements) {
-        postfix = new LinkedList<>();
+    public Rpn(List<Element> prefixNotation) {
+        postfixNotation = new LinkedList<>();
         final Deque<Element> stack = new LinkedList<>();
-        for (Element element : elements) {
+        for (Element element : prefixNotation) {
             if (element instanceof Number) {
-                postfix.add(element);
+                postfixNotation.add(element);
                 continue;
             }
             if (element instanceof LeftBracket) {
@@ -25,22 +25,22 @@ public class Rpn {
             }
             if (element instanceof RightBracket) {
                 while (stack.peek() instanceof LeftBracket) {
-                    postfix.add(stack.pop());
+                    postfixNotation.add(stack.pop());
                 }
                 stack.pop();
                 continue;
             }
             while (!stack.isEmpty() && (element.getPrecedence() <= stack.peek().getPrecedence())) {
-                postfix.add(stack.pop());
+                postfixNotation.add(stack.pop());
             }
-            postfix.add(element);
+            postfixNotation.add(element);
         }
         while (!stack.isEmpty()) {
-            postfix.add(stack.pop());
+            postfixNotation.add(stack.pop());
         }
     }
-    public List<Element> getPostfix() {
-        return postfix;
+    public List<Element> getPostfixNotation() {
+        return postfixNotation;
     }
 
     public BigDecimal calculate() {

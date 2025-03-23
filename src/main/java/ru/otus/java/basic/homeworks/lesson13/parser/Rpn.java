@@ -39,11 +39,23 @@ public class Rpn {
             postfixNotation.add(stack.pop());
         }
     }
+
     public List<Element> getPostfixNotation() {
         return postfixNotation;
     }
 
     public BigDecimal calculate() {
-        return null;
+        final Deque<Number> stack = new LinkedList<>();
+        for (Element element : postfixNotation) {
+            if (element instanceof BinaryOperation) {
+                final var right = stack.pop();
+                final var left = stack.pop();
+                Number result = ((BinaryOperation) element).execute(left, right);
+                stack.push(result);
+                continue;
+            }
+            stack.push((Number) element);
+        }
+        return stack.pop().getValue();
     }
 }

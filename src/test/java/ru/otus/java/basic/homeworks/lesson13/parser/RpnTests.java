@@ -1,5 +1,6 @@
 package ru.otus.java.basic.homeworks.lesson13.parser;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import ru.otus.java.basic.homeworks.lesson13.parser.element.*;
@@ -29,7 +30,7 @@ public class RpnTests {
                 new Number(new BigDecimal(6))
         );
         final var rpn = new Rpn(list);
-        final var values = rpn.getPostfixNotation();
-        final var a = values;
+        final var result = rpn.calculate();
+        Assertions.assertEquals(new BigDecimal("-2.2"), result);
     }
 }

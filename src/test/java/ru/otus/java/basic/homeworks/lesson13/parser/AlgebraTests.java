@@ -1,6 +1,5 @@
 package ru.otus.java.basic.homeworks.lesson13.parser;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import ru.otus.java.basic.homeworks.lesson13.parser.element.*;
@@ -14,7 +13,7 @@ public class AlgebraTests {
     @Test
     void positiveTest() {
         final var algebra = new Algebra("1+2*(3+4)/5-6");
-        final var result = algebra.parse();
+        final var result = algebra.run();
         final var expected = List.of(
                 new Number(new BigDecimal("1")),
                 new SumOperation(),

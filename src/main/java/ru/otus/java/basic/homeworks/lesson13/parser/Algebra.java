@@ -12,7 +12,7 @@ public class Algebra {
     private final Set<Character> brackets = Set.of('(', ')');
     private final Set<Character> mathOperations = Set.of('+', '-', '/', '*');
 
-    private final LinkedList<Element> result;
+    private LinkedList<Element> result;
 
     private final String mathExpression;
     private int position;
@@ -29,7 +29,7 @@ public class Algebra {
         result = new LinkedList<>();
     }
 
-    public Number parseNumber() {
+    private Number parseNumber() {
         StringBuilder builder = new StringBuilder();
         while (position < mathExpression.length() && Character.isDigit(mathExpression.charAt(position))) {
             builder.append(mathExpression.charAt(position));
@@ -38,7 +38,7 @@ public class Algebra {
         return new Number(new BigDecimal(builder.toString()));
     }
 
-    public BinaryOperation parseBinaryOperation() {
+    private BinaryOperation parseBinaryOperation() {
         char currentSymbol = mathExpression.charAt(position);
         if (!((result.getLast() instanceof Number) || (result.getLast() instanceof RightBracket))) {
             throw new RuntimeException(String.format("%c is not binary operation", currentSymbol));
@@ -59,7 +59,7 @@ public class Algebra {
         throw new RuntimeException("unsupported binary operation");
     }
 
-    public Bracket parseBracket() {
+    private Bracket parseBracket() {
         char currentSymbol = mathExpression.charAt(position);
         if (currentSymbol == '(') {
             if (!(result.isEmpty() || result.getLast() instanceof BinaryOperation)) {
@@ -80,7 +80,10 @@ public class Algebra {
         return new RightBracket();
     }
 
-    public List<Element> parse() {
+    public List<Element> run() {
+        position = 0;
+        bracketCounter = 0;
+        result = new LinkedList<>();
         char currentSymbol;
         while (position < mathExpression.length()) {
             currentSymbol = mathExpression.charAt(position);

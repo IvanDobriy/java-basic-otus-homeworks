@@ -16,4 +16,12 @@ public class MathCalculatorTests {
         final var result = calculator.calculate("1 + 2*(3+4)/5 - 6");
         Assertions.assertEquals(new BigDecimal("-2.2"), result);
     }
+
+    @Test
+    void negativeTest() {
+        final var exception = Assertions.assertThrows(RuntimeException.class, () -> {
+            final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
+            calculator.calculate("((1+2)(3+4))");
+        });
+    }
 }

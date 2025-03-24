@@ -63,7 +63,7 @@ public class Algebra {
         char currentSymbol = mathExpression.charAt(position);
         if (currentSymbol == '(') {
             if (!(result.isEmpty() || result.getLast() instanceof BinaryOperation)) {
-                throw new RuntimeException("bla bla bla");
+                throw new RuntimeException("left racket must be first in expression or after some binary operation");
             }
             bracketCounter++;
             position++;

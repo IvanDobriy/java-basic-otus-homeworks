@@ -13,8 +13,8 @@ public class MathCalculatorTests {
     @Test
     void positiveTest() {
         final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
-        final var result = calculator.calculate("1 + 2*(3+4)/5 - 6");
-        Assertions.assertEquals(new BigDecimal("-2.2"), result);
+        final var result = calculator.calculate("1.2 + 2.2*(3+4)/5 - 16");
+        Assertions.assertEquals(new BigDecimal("-11.72"), result);
     }
 
     @Test

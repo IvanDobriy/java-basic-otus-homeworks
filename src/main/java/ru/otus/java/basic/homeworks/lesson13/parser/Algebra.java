@@ -31,8 +31,27 @@ public class Algebra {
 
     private Number parseNumber() {
         StringBuilder builder = new StringBuilder();
-        while (position < mathExpression.length() && Character.isDigit(mathExpression.charAt(position))) {
-            builder.append(mathExpression.charAt(position));
+        boolean pointerExists = false;
+        char currentElement;
+        while (position < mathExpression.length()) {
+            currentElement = mathExpression.charAt(position);
+            if (builder.length() == 0 && currentElement == '.') {
+                throw new RuntimeException("'.' must be after some number");
+            }
+            if (pointerExists && currentElement == '.') {
+                throw new RuntimeException("repeat '.' into number");
+            }
+            if (currentElement == '.') {
+                builder.append(currentElement);
+                position++;
+                pointerExists = true;
+                continue;
+            }
+            if (!Character.isDigit(currentElement)) {
+                break;
+            }
+
+            builder.append(currentElement);
             position++;
         }
         return new Number(new BigDecimal(builder.toString()));
@@ -87,7 +106,7 @@ public class Algebra {
         char currentSymbol;
         while (position < mathExpression.length()) {
             currentSymbol = mathExpression.charAt(position);
-            if (Character.isDigit(currentSymbol)) {
+            if (Character.isDigit(currentSymbol) || currentSymbol == '.') {
                 result.add(parseNumber());
                 continue;
             }

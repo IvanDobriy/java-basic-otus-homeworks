@@ -1,18 +1,18 @@
 package ru.otus.java.basic.homeworks.lesson13.parser;
 
-import ru.otus.java.basic.homeworks.lesson13.parser.element.*;
+import ru.otus.java.basic.homeworks.lesson13.parser.element.Element;
+import ru.otus.java.basic.homeworks.lesson13.parser.element.LeftBracket;
 import ru.otus.java.basic.homeworks.lesson13.parser.element.Number;
+import ru.otus.java.basic.homeworks.lesson13.parser.element.RightBracket;
 
-import java.math.BigDecimal;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RpnCalculator {
-    final List<Element> postfixNotation;
+public class RpnConverter {
 
-    public RpnCalculator(List<Element> prefixNotation) {
-        postfixNotation = new LinkedList<>();
+    public List<Element> convertToPrefixNotion(List<Element> prefixNotation) {
+        final List<Element> postfixNotation = new LinkedList<>();
         final Deque<Element> stack = new LinkedList<>();
         for (Element element : prefixNotation) {
             if (element instanceof Number) {
@@ -38,24 +38,7 @@ public class RpnCalculator {
         while (!stack.isEmpty()) {
             postfixNotation.add(stack.pop());
         }
-    }
 
-    public List<Element> getPostfixNotation() {
         return postfixNotation;
-    }
-
-    public BigDecimal calculate() {
-        final Deque<Number> stack = new LinkedList<>();
-        for (Element element : postfixNotation) {
-            if (element instanceof BinaryOperation) {
-                final var right = stack.pop();
-                final var left = stack.pop();
-                Number result = ((BinaryOperation) element).execute(left, right);
-                stack.push(result);
-                continue;
-            }
-            stack.push((Number) element);
-        }
-        return stack.pop().getValue();
     }
 }

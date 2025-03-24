@@ -70,10 +70,10 @@ public class Algebra {
             return new LeftBracket();
         }
         if (currentSymbol != ')') {
-            throw new RuntimeException("bla bla bla");
+            throw new RuntimeException("expected ')' symbol");
         }
         if (bracketCounter == 0 || !(result.getLast() instanceof Number || result.getLast() instanceof LeftBracket)) {
-            throw new RuntimeException("bla bla bla");
+            throw new RuntimeException("left brace is not closed");
         }
         bracketCounter--;
         position++;

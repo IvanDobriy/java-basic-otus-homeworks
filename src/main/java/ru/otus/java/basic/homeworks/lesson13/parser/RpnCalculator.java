@@ -8,10 +8,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Rpn {
+public class RpnCalculator {
     final List<Element> postfixNotation;
 
-    public Rpn(List<Element> prefixNotation) {
+    public RpnCalculator(List<Element> prefixNotation) {
         postfixNotation = new LinkedList<>();
         final Deque<Element> stack = new LinkedList<>();
         for (Element element : prefixNotation) {

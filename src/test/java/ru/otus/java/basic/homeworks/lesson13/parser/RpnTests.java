@@ -29,7 +29,7 @@ public class RpnTests {
                 new SubtractionOperation(),
                 new Number(new BigDecimal(6))
         );
-        final var rpn = new Rpn(list);
+        final var rpn = new RpnCalculator(list);
         final var result = rpn.calculate();
         Assertions.assertEquals(new BigDecimal("-2.2"), result);
     }

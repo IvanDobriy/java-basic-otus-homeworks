@@ -27,12 +27,15 @@ public class Server {
                      OutputStreamWriter output = new OutputStreamWriter(clientSocket.getOutputStream());
                 ) {
                     output.write("Enter math expression:\n");
+                    output.flush();
                     final var expression = input.readLine();
                     try {
                         final var result = calculator.calculate(expression);
-                        output.write(String.format("\nresult: %s\n", result.toString()));
+                        output.write(String.format("result: %s\n", result.toString()));
+                        output.flush();
                     } catch (RuntimeException e) {
-                        output.write(String.format("\nresult: %s\n", e.getMessage()));
+                        output.write(String.format("result: %s\n", e.getMessage()));
+                        output.flush();
                     }
                 } catch (IOException e) {
                     logger.warning(String.format("message: %s, stackTrace: %s", e.getMessage(), Arrays.toString(e.getStackTrace())));

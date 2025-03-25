@@ -18,8 +18,16 @@ public class MathCalculatorTests {
     }
 
     @Test
+    void unsupportedCharacterTest(){
+        Assertions.assertThrows(RuntimeException.class, ()->{
+            final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
+            calculator.calculate("hello world");
+        });
+    }
+
+    @Test
     void negativeTest() {
-        final var exception = Assertions.assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
             calculator.calculate("((1+2)(3+4))");
         });

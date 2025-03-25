@@ -112,10 +112,13 @@ public class Algebra {
             }
             if (brackets.contains(currentSymbol)) {
                 result.add(parseBracket());
+                continue;
             }
             if (mathOperations.contains(currentSymbol)) {
                 result.add(parseBinaryOperation());
+                continue;
             }
+            throw new RuntimeException(String.format("unsupported character: %c", currentSymbol));
         }
         if (bracketCounter != 0) {
             throw new RuntimeException("bracketCounter != 0");

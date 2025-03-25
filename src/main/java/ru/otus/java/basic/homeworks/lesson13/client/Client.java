@@ -18,6 +18,10 @@ public class Client {
              final var reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              final var writer = new OutputStreamWriter(socket.getOutputStream());
         ) {
+            final var supportedOperations = reader.readLine();
+            System.out.println(supportedOperations);
+            final var example = reader.readLine();
+            System.out.println(example);
             final var msg = reader.readLine();
             System.out.println(msg);
             final var expression = scanner.nextLine();

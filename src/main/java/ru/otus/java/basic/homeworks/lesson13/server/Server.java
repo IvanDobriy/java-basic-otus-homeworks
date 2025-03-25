@@ -13,6 +13,10 @@ import java.util.logging.Logger;
 public class Server {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     private final MathCalculator calculator;
+    private final String msg = "Supported operations: +,-,*,/\n" +
+            "Example: 1.2 + 12*(33.55-6.6)/2\n" +
+            "Enter math expression:\n";
+
 
     public Server(MathCalculator calculator) {
         Objects.requireNonNull(calculator);
@@ -26,7 +30,7 @@ public class Server {
                      BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                      OutputStreamWriter output = new OutputStreamWriter(clientSocket.getOutputStream());
                 ) {
-                    output.write("Enter math expression:\n");
+                    output.write(msg);
                     output.flush();
                     final var expression = input.readLine();
                     try {

@@ -7,6 +7,7 @@ import ru.otus.java.basic.homeworks.lesson13.parser.MathConverter;
 import ru.otus.java.basic.homeworks.lesson13.parser.RpnConverter;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MathCalculatorTests {
@@ -22,6 +23,13 @@ public class MathCalculatorTests {
         Assertions.assertThrows(RuntimeException.class, ()->{
             final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
             calculator.calculate("hello world");
+        });
+    }
+    @Test
+    void prefixTest(){
+        Assertions.assertThrows(RuntimeException.class, ()->{
+            final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
+            calculator.calculate("-1");
         });
     }
 

@@ -59,7 +59,7 @@ public class Algebra {
 
     private BinaryOperation parseBinaryOperation() {
         char currentSymbol = mathExpression.charAt(position);
-        if (!((result.getLast() instanceof Number) || (result.getLast() instanceof RightBracket))) {
+        if (result.isEmpty() || !((result.getLast() instanceof Number) || (result.getLast() instanceof RightBracket))) {
             throw new RuntimeException(String.format("%c is not binary operation", currentSymbol));
         }
         position++;

@@ -81,8 +81,8 @@ public class Algebra {
     private Bracket parseBracket() {
         char currentSymbol = mathExpression.charAt(position);
         if (currentSymbol == '(') {
-            if (!(result.isEmpty() || result.getLast() instanceof BinaryOperation)) {
-                throw new RuntimeException("left racket must be first in expression or after some binary operation");
+            if (!(result.isEmpty() || result.getLast() instanceof BinaryOperation || result.getLast() instanceof LeftBracket)) {
+                throw new RuntimeException("left bracket must be first in expression or after some binary operation");
             }
             bracketCounter++;
             position++;
@@ -91,8 +91,8 @@ public class Algebra {
         if (currentSymbol != ')') {
             throw new RuntimeException("expected ')' symbol");
         }
-        if (bracketCounter == 0 || !(result.getLast() instanceof Number || result.getLast() instanceof LeftBracket)) {
-            throw new RuntimeException("left brace is not closed");
+        if (bracketCounter == 0 || !(result.getLast() instanceof Number || result.getLast() instanceof Bracket)) {
+            throw new RuntimeException("left bracket is not closed");
         }
         bracketCounter--;
         position++;

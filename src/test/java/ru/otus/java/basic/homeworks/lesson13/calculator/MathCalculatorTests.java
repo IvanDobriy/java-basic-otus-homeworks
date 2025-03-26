@@ -19,6 +19,13 @@ public class MathCalculatorTests {
     }
 
     @Test
+    void bracketTest(){
+        final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
+        final var result = calculator.calculate("((1))");
+        Assertions.assertEquals(new BigDecimal("1"), result);
+    }
+
+    @Test
     void unsupportedCharacterTest(){
         Assertions.assertThrows(RuntimeException.class, ()->{
             final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());

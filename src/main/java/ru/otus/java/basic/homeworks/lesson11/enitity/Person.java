@@ -3,11 +3,11 @@ package ru.otus.java.basic.homeworks.lesson11.enitity;
 import java.util.Objects;
 
 public class Person {
-    String name;
+    private String name;
 
-    Position position;
+    private Position position;
 
-    Long id;
+    private Long id;
 
     public Person() {
         name = null;

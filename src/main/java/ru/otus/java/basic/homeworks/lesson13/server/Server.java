@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 public class Server {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     private final MathCalculator calculator;
-    private final String INVITATION = "Supported operations: +,-,*,/\n" +
-            "Example: 1.2 + 12*(33.55-6.6)/2\n" +
+    private final String INVITATION = "Supported operations: +,-,*,/,^\n" +
+            "Example: 1.2^(2+1) + 12*(33.55-6.6)/2\n" +
             "Enter math expression:\n";
 
     private final int port;

@@ -66,30 +66,34 @@ public class FinderTests {
 
     @Test
     void pathTest() {
+        class TestCase {
+            final int key;
+            final Integer expected;
+            final int depth;
+
+            TestCase(int key, int depth, Integer expected) {
+                this.key = key;
+                this.depth = depth;
+                this.expected = expected;
+            }
+        }
         final var sortedList = new ArrayList<Integer>();
         for (int i = 0; i < 256; i++) {
             sortedList.add(i);
         }
+        final var cases = List.of(
+                new TestCase(1, 8, 1),
+                new TestCase(255, 8, 255),
+                new TestCase(128, 1, 128),
+                new TestCase(1000, 9, null),
+                new TestCase(-1, 10, null)
+        );
         final var finder = new Finder<>(sortedList, Comparator.comparingInt(el -> el));
-        var result = finder.find(1);
-        Assertions.assertEquals(1, result);
-        Assertions.assertEquals(8, finder.getPathLength());
-
-        result = finder.find(255);
-        Assertions.assertEquals(255, result);
-        Assertions.assertEquals(8, finder.getPathLength());
-
-        result = finder.find(128);
-        Assertions.assertEquals(128, result);
-        Assertions.assertEquals(1, finder.getPathLength());
-
-        result = finder.find(1000);
-        Assertions.assertNull(result);
-        Assertions.assertEquals(9, finder.getPathLength());
-
-        result = finder.find(-1);
-        Assertions.assertNull(result);
-        Assertions.assertEquals(10, finder.getPathLength());
+        for (TestCase tc : cases) {
+            var result = finder.find(tc.key);
+            Assertions.assertEquals(tc.expected, result);
+            Assertions.assertEquals(tc.depth, finder.getPathLength());
+        }
     }
 
     @Test

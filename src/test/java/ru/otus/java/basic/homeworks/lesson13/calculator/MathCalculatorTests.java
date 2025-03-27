@@ -7,7 +7,6 @@ import ru.otus.java.basic.homeworks.lesson13.parser.MathConverter;
 import ru.otus.java.basic.homeworks.lesson13.parser.RpnConverter;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MathCalculatorTests {
@@ -19,14 +18,14 @@ public class MathCalculatorTests {
     }
 
     @Test
-    void bracketTest(){
+    void bracketTest() {
         final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
         final var result = calculator.calculate("((1))");
         Assertions.assertEquals(new BigDecimal("1"), result);
     }
 
     @Test
-    void powerTest(){
+    void powerTest() {
         //2*3^3
         final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
         final var result = calculator.calculate("((1))");
@@ -34,15 +33,16 @@ public class MathCalculatorTests {
     }
 
     @Test
-    void unsupportedCharacterTest(){
-        Assertions.assertThrows(RuntimeException.class, ()->{
+    void unsupportedCharacterTest() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
             calculator.calculate("hello world");
         });
     }
+
     @Test
-    void prefixTest(){
-        Assertions.assertThrows(RuntimeException.class, ()->{
+    void prefixTest() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             final var calculator = new MathCalculator(new MathConverter(), new RpnConverter());
             calculator.calculate("-1");
         });

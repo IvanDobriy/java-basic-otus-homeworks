@@ -1,7 +1,6 @@
 package ru.otus.java.basic.homeworks.lesson13.parser.element;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 public class PowerOperation extends BinaryOperation {
     @Override

@@ -5,6 +5,7 @@ public class SubtractionOperation extends BinaryOperation {
     public int getPrecedence() {
         return 1;
     }
+
     @Override
     public Number execute(Number left, Number right) {
         return new Number(left.getValue().subtract(right.getValue()));

@@ -5,6 +5,7 @@ public class MultiplicationOperation extends BinaryOperation {
     public int getPrecedence() {
         return 2;
     }
+
     @Override
     public Number execute(Number left, Number right) {
         return new Number(left.getValue().multiply(right.getValue()));

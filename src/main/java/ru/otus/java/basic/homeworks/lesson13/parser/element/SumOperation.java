@@ -1,7 +1,5 @@
 package ru.otus.java.basic.homeworks.lesson13.parser.element;
 
-import java.math.BigDecimal;
-
 public class SumOperation extends BinaryOperation {
     @Override
     public int getPrecedence() {

@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Algebra {
     private final Set<Character> brackets = Set.of('(', ')');
-    private final Set<Character> mathOperations = Set.of('+', '-', '/', '*');
+    private final Set<Character> mathOperations = Set.of('+', '-', '/', '*', '^');
 
     private LinkedList<Element> result;
 
@@ -74,6 +74,9 @@ public class Algebra {
         }
         if (currentSymbol == '*') {
             return new MultiplicationOperation();
+        }
+        if (currentSymbol == '^') {
+            return new PowerOperation();
         }
         throw new RuntimeException("unsupported binary operation");
     }

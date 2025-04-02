@@ -27,13 +27,13 @@ public class MathCalculator {
         final var prefixNotation = mathConverter.convert(mathExpression);
         final var postfixNotation = rpnConverter.convertToPrefixNotion(prefixNotation);
         final Deque<Number> stack = new LinkedList<>();
-        Number right;
-        Number left;
+        Number rightOperand;
+        Number leftOperand;
         for (Element element : postfixNotation) {
             if (element instanceof BinaryOperation) {
-                right = stack.pop();
-                left = stack.pop();
-                Number result = ((BinaryOperation) element).execute(left, right);
+                rightOperand = stack.pop();
+                leftOperand = stack.pop();
+                Number result = ((BinaryOperation) element).execute(leftOperand, rightOperand);
                 stack.push(result);
                 continue;
             }

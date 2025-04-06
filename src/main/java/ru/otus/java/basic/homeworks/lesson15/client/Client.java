@@ -1,9 +1,6 @@
 package ru.otus.java.basic.homeworks.lesson15.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Objects;
@@ -22,13 +19,13 @@ public class Client {
     }
 
     interface Callback {
-        void call(BufferedReader reader, OutputStreamWriter writer) throws IOException;
+        void call(DataInputStream reader, DataOutputStream writer) throws IOException;
     }
 
     private void connect(Callback callback) {
         try (final var socket = new Socket(host, port);
-             final var reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             final var writer = new OutputStreamWriter(socket.getOutputStream());
+             final var reader = new DataInputStream(socket.getInputStream());
+             final var writer = new DataOutputStream(socket.getOutputStream());
         ) {
             callback.call(reader, writer);
         } catch (IOException e) {
@@ -36,21 +33,21 @@ public class Client {
         }
     }
 
-    private void readServerMsg(BufferedReader reader) throws IOException {
+    private void readServerMsg(DataInputStream reader) throws IOException {
         for (int i = 0; i < 3; i++) {
-            final var msg = reader.readLine();
+            final var msg = reader.readUTF();
             System.out.println(msg);
         }
     }
 
-    private void writeExpression(OutputStreamWriter writer, Scanner scanner) throws IOException {
+    private void writeExpression(DataOutputStream writer, Scanner scanner) throws IOException {
         final var expression = scanner.nextLine();
-        writer.write(expression + "\n");
+        writer.writeUTF(expression + "\n");
         writer.flush();
     }
 
-    private void readResult(BufferedReader reader) throws IOException {
-        final var result = reader.readLine();
+    private void readResult(DataInputStream reader) throws IOException {
+        final var result = reader.readUTF();
         System.out.println(result);
     }
 

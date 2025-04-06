@@ -1,10 +1,8 @@
 package ru.otus.java.basic.homeworks.lesson15.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.ServerSocket;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -13,7 +11,7 @@ public class Server {
     private final int port;
 
     interface Callback {
-        void call(BufferedReader input, OutputStreamWriter output) throws IOException;
+        void call(DataInputStream input, DataOutputStream output) throws IOException;
     }
 
     public Server(int port) {
@@ -24,8 +22,8 @@ public class Server {
         try (final var server = new ServerSocket(port)) {
             while (true) {
                 try (final var clientSocket = server.accept();
-                     BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                     OutputStreamWriter output = new OutputStreamWriter(clientSocket.getOutputStream());
+                     DataInputStream input = new DataInputStream(clientSocket.getInputStream());
+                     DataOutputStream output = new DataOutputStream(clientSocket.getOutputStream());
                 ) {
                     callback.call(input, output);
                 } catch (IOException e) {
@@ -37,13 +35,8 @@ public class Server {
         }
     }
 
-    private void sendMsg(OutputStreamWriter output, String msg) throws IOException {
-        output.write(msg);
-        output.flush();
-    }
-
-    private String receiveMathExpression(BufferedReader input) throws IOException {
-        return input.readLine();
+    private void sendMsg(DataOutputStream output, String msg) throws IOException {
+        output.write(msg.getBytes(StandardCharsets.UTF_8));
     }
 
 
@@ -52,5 +45,4 @@ public class Server {
             sendMsg(output, "hello");
         });
     }
-
 }

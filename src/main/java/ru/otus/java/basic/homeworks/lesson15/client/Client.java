@@ -1,4 +1,4 @@
-package ru.otus.java.basic.homeworks.lesson13.client;
+package ru.otus.java.basic.homeworks.lesson15.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,16 +36,31 @@ public class Client {
         }
     }
 
+    private void readServerMsg(BufferedReader reader) throws IOException {
+        for (int i = 0; i < 3; i++) {
+            final var msg = reader.readLine();
+            System.out.println(msg);
+        }
+    }
+
+    private void writeExpression(OutputStreamWriter writer, Scanner scanner) throws IOException {
+        final var expression = scanner.nextLine();
+        writer.write(expression + "\n");
+        writer.flush();
+    }
 
     private void readResult(BufferedReader reader) throws IOException {
         final var result = reader.readLine();
         System.out.println(result);
     }
 
-    public void run() {
+    void run() {
+        final var scanner = new Scanner(System.in);
         connect((reader, writer) -> {
-            final var line = reader.readLine();
-            System.out.println(line);
+            readServerMsg(reader);
+            writeExpression(writer, scanner);
+            readResult(reader);
         });
     }
+
 }

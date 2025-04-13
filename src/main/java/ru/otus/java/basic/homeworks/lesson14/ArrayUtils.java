@@ -2,15 +2,15 @@ package ru.otus.java.basic.homeworks.lesson14;
 
 public class ArrayUtils {
     static long getExecutionTime(Runnable runnable) {
-        final long now = System.currentTimeMillis();
+        final long now = System.nanoTime();
         runnable.run();
-        return System.currentTimeMillis() - now;
+        return System.nanoTime() - now;
     }
 
     static double[] createArray() {
         final double[] arr = new double[100_000_000];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = 1.114 * Math.cos(i) * Math.sin(i * 0.2) * Math.cos(i / 1.2);
+            arr[i] = 1.14 * Math.cos(i) * Math.sin(i * 0.2) * Math.cos(i / 1.2);
         }
         return arr;
     }

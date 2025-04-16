@@ -36,35 +36,16 @@ public class Client {
         }
     }
 
-    private void readServerMsg(BufferedReader reader) throws IOException {
-        for (int i = 0; i < 3; i++) {
-            final var msg = reader.readLine();
-            System.out.println(msg);
-        }
-    }
-
-    private void writeExpression(OutputStreamWriter writer, Scanner scanner) throws IOException {
-        final var expression = scanner.nextLine();
-        writer.write(expression + "\n");
-        writer.flush();
-    }
 
     private void readResult(BufferedReader reader) throws IOException {
         final var result = reader.readLine();
         System.out.println(result);
     }
 
-    void run() {
-        final var scanner = new Scanner(System.in);
+    public void run() {
         connect((reader, writer) -> {
-            readServerMsg(reader);
-            writeExpression(writer, scanner);
-            readResult(reader);
+            final var line = reader.readLine();
+            System.out.println(line);
         });
-    }
-
-    static public void main(String[] args) {
-        final var client = new Client("localhost", 8080);
-        client.run();
     }
 }

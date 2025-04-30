@@ -23,5 +23,7 @@ public class BoxTests {
         appleBox.pourTo(fruitBox);
         orangeBox.pourTo(fruitBox);
         Assertions.assertEquals(6, fruitBox.weight());
+        Assertions.assertEquals(0, appleBox.weight());
+        Assertions.assertEquals(0, orangeBox.weight());
     }
 }

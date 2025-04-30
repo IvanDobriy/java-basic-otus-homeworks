@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box<T extends Fruit> {
-    private final List<T> content;
+    private List<T> content;
 
     Box() {
         content = new ArrayList<>();
@@ -30,5 +30,6 @@ public class Box<T extends Fruit> {
         for (var el : content) {
             aBox.add(el);
         }
+        content = new ArrayList<>();
     }
 }

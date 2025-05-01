@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -33,6 +34,28 @@ public class ArrayUtilsTests {
                 Arguments.arguments(new int[]{1}, null, RuntimeException.class),
                 Arguments.arguments(new int[]{2}, null, RuntimeException.class),
                 Arguments.arguments(new int[]{2, 1}, null, RuntimeException.class)
+        ).stream();
+    }
+
+    @ParameterizedTest
+    @MethodSource("getCheckData")
+    void checkInTest(Set<Integer> set, int[] arr, boolean expected, Class<Exception> exceptionClass) {
+        if(exceptionClass != null){
+            Assertions.assertThrows(exceptionClass, ()->{
+                ArrayUtils.checkIn(set, arr);
+            });
+            return;
+        }
+        boolean result = ArrayUtils.checkIn(set, arr);
+        Assertions.assertEquals(expected, result);
+    }
+
+    static Stream<Arguments> getCheckData() {
+        return List.of(
+                Arguments.arguments(Set.of(1, 2), new int[]{1, 2, 3}, true, null),
+                Arguments.arguments(Set.of(1, 2, 3), new int[]{1, 2, 3}, true, null),
+                Arguments.arguments(Set.of(1), new int[]{2,3}, false, null),
+                Arguments.arguments(Set.of(1, 2, 3, 4), new int[]{1, 2, 3}, false, IllegalArgumentException.class)
         ).stream();
     }
 }

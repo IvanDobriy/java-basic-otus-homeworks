@@ -23,7 +23,7 @@ public class ArrayUtils {
     }
 
     static boolean checkIn(Set<Integer> set, int[] arr) {
-        if(arr.length < set.size()){
+        if (arr.length < set.size()) {
             throw new IllegalArgumentException("arr.length < set.size");
         }
         int result = set.size();
